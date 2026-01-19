@@ -52,3 +52,50 @@ Este archivo es la fuente de verdad sobre el avance del proyecto. El agente de A
 - Agregar contenido a cada sección
 - Implementar navegación funcional
 - Añadir animaciones y transiciones
+
+---
+
+### ✅ [19-ENE-2026] - Organización de Assets y Logo
+
+**Estado:** Completado
+
+**Cambios Realizados:**
+- Creada estructura de carpetas: `assets/images/`
+- Movidos archivos `logo.png` (196KB) y `logo.svg` (2.7KB) desde la raíz a `assets/images/`
+- Agregado logo SVG en el header del sitio
+- Implementado favicon con SVG y PNG como fallback
+- Creados estilos CSS para el logo (40px de altura, responsive, hover effect)
+
+**Archivos Modificados:**
+- `index.html` - Agregado logo en header y favicon en head
+- `css/layout.css` - Estilos para `.logo` y `.logo-img`
+
+**Detalles Técnicos:**
+- ✅ Estructura de assets organizada: `assets/images/`
+- ✅ Logo SVG como principal (mejor calidad, menor peso)
+- ✅ Logo PNG como fallback para navegadores antiguos
+- ✅ Favicon configurado con ambos formatos
+- ✅ Logo responsive (40px altura, se adapta proporcionalmente)
+- ✅ Hover effect suave en el logo
+
+**Estructura Actualizada del Proyecto:**
+```
+📁 Pagina-web/
+├── 📁 assets/
+│   └── 📁 images/
+│       ├── logo.svg (2.7KB)
+│       └── logo.png (196KB)
+├── 📁 css/
+│   ├── variables.css
+│   ├── base.css
+│   └── layout.css
+├── index.html
+└── LOG_PROGRESO.md
+```
+
+**Beneficios:**
+- Proyecto mejor organizado y escalable
+- Preparado para agregar más assets (iconos, imágenes, etc.)
+- Logo visible en pestaña del navegador (favicon)
+- Logo clickeable que lleva al inicio (#home)
+

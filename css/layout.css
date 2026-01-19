@@ -39,6 +39,23 @@ header {
     background-color: var(--color-bg-primary);
 }
 
+/* Logo en el Header */
+.logo {
+    display: inline-block;
+    line-height: 0;
+    transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+    opacity: 0.8;
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+    display: block;
+}
+
 footer {
     padding: var(--spacing-xl) 0;
     border-top: 1px solid rgba(241, 245, 249, 0.1);
