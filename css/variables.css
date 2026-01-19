@@ -1,0 +1,70 @@
+/**
+ * SISTEMA DE VARIABLES CSS
+ * ========================
+ * Define todos los tokens de diseño del portafolio
+ * Estas variables se usan en todo el sitio para mantener consistencia
+ */
+
+:root {
+    /* ===== COLORES ===== */
+    
+    /* Colores Principales */
+    --color-bg-primary: #242124;
+    --color-text-primary: #F1F5F9;
+    
+    /* Colores Secundarios (Paleta Vibrante) */
+    --color-accent-1: #F94144;
+    --color-accent-2: #F3722C;
+    --color-accent-3: #F8961E;
+    --color-accent-4: #F9844A;
+    --color-accent-5: #F9C74F;
+    --color-accent-6: #90BE6D;
+    --color-accent-7: #43AA8B;
+    --color-accent-8: #4D908E;
+    --color-accent-9: #577590;
+    --color-accent-10: #277DA1;
+    
+    
+    /* ===== TIPOGRAFÍA ===== */
+    
+    /* Familia de Fuente */
+    --font-primary: 'Libre Franklin', sans-serif;
+    
+    /* Tamaños de Fuente */
+    --font-size-base: 1rem;        /* 16px */
+    --font-size-h1: 3rem;          /* 48px */
+    --font-size-h2: 2.5rem;        /* 40px */
+    --font-size-h3: 2rem;          /* 32px */
+    --font-size-h4: 1.5rem;        /* 24px */
+    
+    /* Pesos de Fuente */
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    
+    /* ===== ESPACIADOS ===== */
+    
+    --spacing-xs: 0.5rem;      /* 8px */
+    --spacing-sm: 1rem;        /* 16px */
+    --spacing-md: 1.5rem;      /* 24px */
+    --spacing-lg: 2rem;        /* 32px */
+    --spacing-xl: 3rem;        /* 48px */
+    --spacing-2xl: 4rem;       /* 64px */
+    
+    
+    /* ===== RADIOS / BORDES REDONDEADOS ===== */
+    
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    
+    
+    /* ===== LAYOUT ===== */
+    
+    --container-max-width: 1200px;
+    --container-padding: 2rem;
+}

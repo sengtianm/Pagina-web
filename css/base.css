@@ -1,0 +1,102 @@
+/**
+ * ESTILOS BASE
+ * ============
+ * Reset CSS, estilos fundamentales del body y jerarquía tipográfica
+ */
+
+/* ===== RESET CSS ===== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+/* ===== ESTILOS BASE DEL BODY ===== */
+
+body {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-regular);
+    line-height: 1.6;
+
+    /* Suavizado de fuente para mejor legibilidad */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* ===== JERARQUÍA TIPOGRÁFICA ===== */
+
+h1 {
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2;
+    margin-bottom: var(--spacing-lg);
+}
+
+h2 {
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.3;
+    margin-bottom: var(--spacing-md);
+}
+
+h3 {
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.4;
+    margin-bottom: var(--spacing-md);
+}
+
+h4 {
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.4;
+    margin-bottom: var(--spacing-sm);
+}
+
+p {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-regular);
+    margin-bottom: var(--spacing-sm);
+}
+
+span {
+    font-family: var(--font-primary);
+}
+
+
+/* ===== ESTILOS DE ENLACES ===== */
+
+a {
+    color: var(--color-text-primary);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+a:hover {
+    opacity: 0.8;
+}
+
+
+/* ===== UTILIDADES DE ESPACIADO ===== */
+
+/* Espaciado entre elementos de texto */
+h1+p,
+h2+p,
+h3+p,
+h4+p {
+    margin-top: var(--spacing-xs);
+}
+
+p+p {
+    margin-top: var(--spacing-sm);
+}
