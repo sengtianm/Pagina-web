@@ -35,6 +35,14 @@ document.addEventListener('DOMContentLoaded', function () {
             dropdown.setAttribute('aria-hidden', !isOpen);
         });
 
+        // Cerrar menú al hacer clic en cualquier enlace del dropdown
+        const dropdownLinks = dropdown.querySelectorAll('.dropdown-link');
+        dropdownLinks.forEach(function (link) {
+            link.addEventListener('click', function () {
+                closeDropdown();
+            });
+        });
+
         // Cerrar menú al hacer clic fuera
         document.addEventListener('click', function (e) {
             if (!dropdown.contains(e.target) && !toggleBtn.contains(e.target)) {
