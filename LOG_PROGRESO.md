@@ -147,3 +147,67 @@ Este archivo es la fuente de verdad sobre el avance del proyecto. El agente de A
 - Agregar enlaces de navegación dentro de la barra
 - Implementar logo en la barra
 - Añadir efectos hover en los enlaces
+
+---
+
+### ✅ [20-ENE-2026] - Mejoras Prioridad Alta (Navbar)
+
+**Estado:** Completado
+
+**Mejoras Implementadas:**
+1. **Glassmorphism** - `backdrop-filter: blur(12px)` con fallback
+2. **Variables de Transición** - `--transition-fast/base/slow/smooth`
+3. **Variables de Sombras** - `--shadow-navbar/glow-subtle/inset-glow`
+4. **Estructura Flexbox** - Preparada para 7 elementos futuros
+5. **Optimización** - `will-change: transform` para GPU
+
+**Archivos Modificados:**
+- `css/variables.css` - +15 líneas (transiciones + sombras)
+- `css/layout.css` - Navbar actualizada (+24 líneas)
+
+**Verificación:**
+1. Abre `index.html` en el navegador
+2. La navbar debe verse semi-transparente con efecto vidrio
+
+---
+
+### ✅ [20-ENE-2026] - Mejoras Prioridad Media (Navbar Responsive)
+
+**Estado:** Completado
+
+**Cambios por Breakpoint:**
+
+| Dispositivo | Ancho | Altura | Offset Top | Padding |
+|-------------|-------|--------|------------|---------|
+| Desktop (>1024px) | max 600px | 40px | 20px | 24px |
+| Tablet (≤1024px) | max 520px | 40px | 16px | 16px |
+| Mobile (≤768px) | 94% | 36px | 12px | 8px |
+
+**Archivos Modificados:**
+- `css/layout.css` - +20 líneas en media queries
+
+**Verificación:**
+1. Cambia el tamaño de la ventana del navegador
+2. La navbar debe adaptarse suavemente en cada breakpoint
+
+---
+
+### ✅ [20-ENE-2026] - Mejoras Prioridad Baja (Variables rgba + Zona Segura)
+
+**Estado:** Completado
+
+**Nuevas Variables rgba Centralizadas:**
+- `--color-bg-glass` - Fondo glassmorphism
+- `--color-border-subtle` - Bordes sutiles
+- `--color-shadow-dark` - Sombras oscuras
+- `--color-glow-light` - Glow sutil
+- `--color-border-light` - Bordes claros
+
+**Variable Zona Segura:**
+- `--navbar-safe-zone` - Espacio reservado (80px desktop) para evitar contenido oculto
+
+**Archivos Modificados:**
+- `css/variables.css` - +12 líneas (variables rgba + zona segura)
+- `css/layout.css` - Actualizado para usar variables
+
+**Beneficio:** Ahora puedes ajustar sombras/transparencias desde un solo lugar.

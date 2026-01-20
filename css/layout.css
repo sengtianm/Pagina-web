@@ -44,16 +44,41 @@ section {
     max-width: var(--navbar-max-width);
     height: var(--navbar-height);
 
-    /* Efecto isla flotante */
-    background-color: var(--navbar-bg);
+    /* Estructura interna - Flexbox para distribuir contenido */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: 0 var(--spacing-md);
+
+    /* Efecto isla flotante con glassmorphism */
+    background-color: var(--color-bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    /* Safari fallback */
     border: 1px solid var(--navbar-border-color);
     border-radius: var(--radius-xl);
 
-    /* Iluminación sutil / efecto 3D suave */
+    /* Sombras usando variables */
     box-shadow:
-        0 4px 20px rgba(0, 0, 0, 0.3),
-        0 0 0 1px var(--navbar-glow),
-        inset 0 1px 0 var(--navbar-glow);
+        var(--shadow-navbar),
+        var(--shadow-glow-subtle),
+        var(--shadow-inset-glow);
+
+    /* Optimización de rendimiento */
+    will-change: transform;
+
+    /* Transiciones para futuros efectos interactivos */
+    transition:
+        box-shadow var(--transition-base),
+        background-color var(--transition-base);
+}
+
+/* Fallback para navegadores sin soporte de backdrop-filter */
+@supports not (backdrop-filter: blur(12px)) {
+    .navbar-floating {
+        background-color: var(--navbar-bg);
+    }
 }
 
 
@@ -61,7 +86,7 @@ section {
 
 footer {
     padding: var(--spacing-xl) 0;
-    border-top: 1px solid rgba(241, 245, 249, 0.1);
+    border-top: 1px solid var(--color-border-subtle);
 }
 
 
@@ -100,6 +125,15 @@ footer {
         --font-size-h4: 1.25rem;
         /* 20px */
         --container-padding: 1.5rem;
+
+        /* Navbar responsive - Tablet */
+        --navbar-top-offset: 16px;
+        --navbar-max-width: 520px;
+    }
+
+    .navbar-floating {
+        gap: var(--spacing-xs);
+        padding: 0 var(--spacing-sm);
     }
 
     .grid-4 {
@@ -124,6 +158,18 @@ footer {
         /* 20px */
         --container-padding: 1rem;
         --spacing-2xl: 3rem;
+
+        /* Navbar responsive - Mobile */
+        --navbar-top-offset: 12px;
+        --navbar-height: 36px;
+        --navbar-max-width: 92%;
+    }
+
+    .navbar-floating {
+        width: 94%;
+        gap: var(--spacing-xs);
+        padding: 0 var(--spacing-xs);
+        border-radius: var(--radius-lg);
     }
 
     section {

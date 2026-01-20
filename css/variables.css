@@ -7,11 +7,11 @@
 
 :root {
     /* ===== COLORES ===== */
-    
+
     /* Colores Principales */
     --color-bg-primary: #242124;
     --color-text-primary: #F1F5F9;
-    
+
     /* Colores Secundarios (Paleta Vibrante) */
     --color-accent-1: #F94144;
     --color-accent-2: #F3722C;
@@ -23,58 +23,105 @@
     --color-accent-8: #4D908E;
     --color-accent-9: #577590;
     --color-accent-10: #277DA1;
-    
-    
+
+    /* Colores con Transparencia (rgba) */
+    --color-bg-glass: rgba(36, 33, 36, 0.85);
+    /* Fondo glassmorphism */
+    --color-border-subtle: rgba(241, 245, 249, 0.1);
+    /* Bordes sutiles */
+    --color-shadow-dark: rgba(0, 0, 0, 0.3);
+    /* Sombras oscuras */
+    --color-glow-light: rgba(255, 255, 255, 0.03);
+    /* Glow sutil */
+    --color-border-light: rgba(255, 255, 255, 0.08);
+    /* Bordes claros */
+
+
     /* ===== TIPOGRAFÍA ===== */
-    
+
     /* Familia de Fuente */
     --font-primary: 'Libre Franklin', sans-serif;
-    
+
     /* Tamaños de Fuente */
-    --font-size-base: 1rem;        /* 16px */
-    --font-size-h1: 3rem;          /* 48px */
-    --font-size-h2: 2.5rem;        /* 40px */
-    --font-size-h3: 2rem;          /* 32px */
-    --font-size-h4: 1.5rem;        /* 24px */
-    
+    --font-size-base: 1rem;
+    /* 16px */
+    --font-size-h1: 3rem;
+    /* 48px */
+    --font-size-h2: 2.5rem;
+    /* 40px */
+    --font-size-h3: 2rem;
+    /* 32px */
+    --font-size-h4: 1.5rem;
+    /* 24px */
+
     /* Pesos de Fuente */
     --font-weight-light: 300;
     --font-weight-regular: 400;
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
-    
-    
+
+
     /* ===== ESPACIADOS ===== */
-    
-    --spacing-xs: 0.5rem;      /* 8px */
-    --spacing-sm: 1rem;        /* 16px */
-    --spacing-md: 1.5rem;      /* 24px */
-    --spacing-lg: 2rem;        /* 32px */
-    --spacing-xl: 3rem;        /* 48px */
-    --spacing-2xl: 4rem;       /* 64px */
-    
-    
+
+    --spacing-xs: 0.5rem;
+    /* 8px */
+    --spacing-sm: 1rem;
+    /* 16px */
+    --spacing-md: 1.5rem;
+    /* 24px */
+    --spacing-lg: 2rem;
+    /* 32px */
+    --spacing-xl: 3rem;
+    /* 48px */
+    --spacing-2xl: 4rem;
+    /* 64px */
+
+
     /* ===== RADIOS / BORDES REDONDEADOS ===== */
-    
+
     --radius-sm: 4px;
     --radius-md: 8px;
     --radius-lg: 12px;
     --radius-xl: 16px;
-    
-    
+
+
     /* ===== LAYOUT ===== */
-    
+
     --container-max-width: 1200px;
     --container-padding: 2rem;
-    
-    
+
+
     /* ===== NAVBAR FLOTANTE ===== */
-    
+
     --navbar-height: 40px;
     --navbar-top-offset: 20px;
     --navbar-max-width: 600px;
     --navbar-bg: var(--color-bg-primary);
-    --navbar-border-color: rgba(255, 255, 255, 0.08);
-    --navbar-glow: rgba(255, 255, 255, 0.03);
+    --navbar-border-color: var(--color-border-light);
+    --navbar-glow: var(--color-glow-light);
+
+    /* 
+     * ZONA SEGURA - Espacio reservado para navbar fija
+     * ================================================
+     * Usar este valor como padding-top o margin-top en el primer 
+     * elemento de contenido para evitar que quede oculto detrás 
+     * de la navbar. Calcular: altura navbar + offset + margen extra
+     */
+    --navbar-safe-zone: calc(var(--navbar-height) + var(--navbar-top-offset) + 20px);
+
+
+    /* ===== TRANSICIONES ===== */
+
+    --transition-fast: 150ms ease;
+    --transition-base: 250ms ease;
+    --transition-slow: 400ms ease;
+    --transition-smooth: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+
+    /* ===== SOMBRAS ===== */
+
+    --shadow-navbar: 0 4px 20px var(--color-shadow-dark);
+    --shadow-glow-subtle: 0 0 0 1px var(--color-glow-light);
+    --shadow-inset-glow: inset 0 1px 0 var(--color-glow-light);
 }
