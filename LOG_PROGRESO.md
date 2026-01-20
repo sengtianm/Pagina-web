@@ -288,3 +288,31 @@ Este archivo es la fuente de verdad sobre el avance del proyecto. El agente de A
 1. En Home: navbar visible
 2. Scroll abajo: navbar desaparece, logo flotante aparece
 3. Scroll arriba: navbar reaparece
+
+---
+
+### ✅ [20-ENE-2026] - Mejoras de Revisión Crítica (8 puntos)
+
+**Estado:** Completado
+
+**Prioridad Alta:**
+- ✅ Agregado `focus-visible` al botón hamburguesa (accesibilidad)
+- ✅ Dropdown se cierra automáticamente al ocultar navbar
+
+**Prioridad Media:**
+- ✅ Estilos responsive para `.logo-floating` (tablet/móvil)
+- ✅ Estilos responsive para `.navbar-dropdown` (tablet/móvil)
+- ✅ Renombrado `menu.js` → `navigation.js`
+
+**Prioridad Baja:**
+- ✅ Unificados los dos `DOMContentLoaded` en uno
+- ✅ Variable `--color-shadow-dark` para drop-shadow
+- ✅ Documentada clase `.navbar-name` como reservada
+
+**Archivos Modificados:**
+- `css/layout.css` - +40 líneas (focus-visible, responsive)
+- `js/navigation.js` - Nuevo (reemplaza menu.js)
+- `index.html` - Actualizada referencia script
+
+**Archivos Eliminados:**
+- `js/menu.js`

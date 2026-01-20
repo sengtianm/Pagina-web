@@ -73,7 +73,7 @@ section {
     transition:
         box-shadow var(--transition-base),
         background-color var(--transition-base),
-        opacity 500ms ease;
+        opacity 1000ms ease;
 }
 
 /* Estado oculto de navbar */
@@ -111,6 +111,7 @@ section {
     display: block;
 }
 
+/* Clase reservada para uso futuro (nombre junto al logo) */
 .navbar-name {
     font-family: var(--font-primary);
     font-size: 0.875rem;
@@ -140,10 +141,10 @@ section {
     opacity: 0;
     visibility: hidden;
 
-    /* Transición solo opacidad 0.5s */
+    /* Transición solo opacidad 1s */
     transition:
-        opacity 500ms ease,
-        visibility 500ms ease;
+        opacity 1000ms ease,
+        visibility 1000ms ease;
 }
 
 /* Estado visible del logo flotante */
@@ -161,7 +162,7 @@ section {
     /* Más grande que en navbar (24px) */
     width: auto;
     display: block;
-    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 2px 8px var(--color-shadow-dark));
 }
 
 /* ===== NAVBAR TOGGLE (Icono Hamburguesa) ===== */
@@ -190,6 +191,13 @@ section {
 
 .navbar-toggle:focus {
     outline: none;
+}
+
+/* Indicador de foco visible para navegación por teclado (accesibilidad) */
+.navbar-toggle:focus-visible {
+    outline: 2px solid var(--color-accent-5);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
 }
 
 .navbar-toggle-icon {
@@ -302,6 +310,21 @@ footer {
         padding: 0 var(--spacing-sm);
     }
 
+    /* Logo flotante responsive - Tablet */
+    .logo-floating {
+        left: var(--spacing-md);
+    }
+
+    .logo-floating-img {
+        height: 28px;
+    }
+
+    /* Dropdown responsive - Tablet */
+    .navbar-dropdown {
+        width: 180px;
+        min-height: 130px;
+    }
+
     .grid-4 {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -336,6 +359,23 @@ footer {
         gap: var(--spacing-xs);
         padding: 0 var(--spacing-xs);
         border-radius: var(--radius-lg);
+    }
+
+    /* Logo flotante responsive - Mobile */
+    .logo-floating {
+        left: var(--spacing-sm);
+        top: var(--navbar-top-offset);
+    }
+
+    .logo-floating-img {
+        height: 26px;
+    }
+
+    /* Dropdown responsive - Mobile */
+    .navbar-dropdown {
+        width: 160px;
+        min-height: 120px;
+        padding: var(--spacing-xs);
     }
 
     section {
