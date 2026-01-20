@@ -27,7 +27,20 @@
 <body>
     <!-- Barra de Navegación Flotante -->
     <nav class="navbar-floating" aria-label="Navegación principal">
-        <!-- Contenido de navegación se agregará en futuro -->
+        <!-- Logo (izquierda) -->
+        <a href="#home" class="navbar-brand">
+            <img src="assets/images/logo.svg" alt="Logo - Ir al inicio" class="navbar-logo">
+        </a>
+
+        <!-- Icono Hamburguesa (derecha) -->
+        <button class="navbar-toggle" aria-label="Abrir menú" aria-expanded="false">
+            <span class="navbar-toggle-icon">☰</span>
+        </button>
+
+        <!-- Menú Desplegable -->
+        <div class="navbar-dropdown" aria-hidden="true">
+            <!-- Contenido se agregará después -->
+        </div>
     </nav>
 
     <!-- Contenido Principal -->
@@ -102,6 +115,9 @@
             <!-- Footer se agregará en futuro -->
         </div>
     </footer>
+
+    <!-- Scripts -->
+    <script src="js/menu.js"></script>
 </body>
 
 </html>

@@ -211,3 +211,52 @@ Este archivo es la fuente de verdad sobre el avance del proyecto. El agente de A
 - `css/layout.css` - Actualizado para usar variables
 
 **Beneficio:** Ahora puedes ajustar sombras/transparencias desde un solo lugar.
+
+---
+
+### ✅ [20-ENE-2026] - Logo + Nombre en Navbar
+
+**Estado:** Completado
+
+**Elementos Agregados:**
+- Logo clicable (SVG) en esquina derecha
+- Nombre "Sebastián Moreno" junto al logo
+- Enlace a `#home`
+
+**Estilos Creados:**
+- `.navbar-brand` - Contenedor flexbox
+- `.navbar-logo` - Logo 24px altura
+- `.navbar-name` - Tipografía 14px medium
+
+**Archivos Modificados:**
+- `css/layout.css` - +30 líneas (estilos brand)
+- `index.html` - Estructura logo + nombre
+
+**Verificación:**
+1. Abre `index.html`
+2. Logo y nombre deben verse en la esquina derecha
+3. Clic debe llevar al inicio (#home)
+
+---
+
+### ✅ [20-ENE-2026] - Icono Hamburguesa + Menú Desplegable
+
+**Estado:** Completado
+
+**Elementos Agregados:**
+- Icono ☰ en esquina derecha
+- Hover cambia a amarillo (#F9C74F)
+- Menú desplegable vertical vacío
+- Toggle abrir/cerrar
+
+**Archivos Creados:**
+- `js/menu.js` - Lógica toggle con accesibilidad
+
+**Archivos Modificados:**
+- `css/layout.css` - +80 líneas (toggle + dropdown)
+- `index.html` - Estructura icono + menú + script
+
+**Verificación:**
+1. Haz clic en ☰ para abrir menú
+2. Clic fuera cierra el menú
+3. Tecla Escape también cierra

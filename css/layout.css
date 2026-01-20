@@ -47,7 +47,8 @@ section {
     /* Estructura interna - Flexbox para distribuir contenido */
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    /* Logo izquierda, icono derecha */
     gap: var(--spacing-sm);
     padding: 0 var(--spacing-md);
 
@@ -81,6 +82,121 @@ section {
     }
 }
 
+
+/* ===== NAVBAR BRAND (Logo + Nombre) ===== */
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    text-decoration: none;
+    color: var(--color-text-primary);
+    transition: opacity var(--transition-base);
+}
+
+.navbar-brand:hover {
+    opacity: 0.85;
+}
+
+.navbar-logo {
+    height: 24px;
+    width: auto;
+    display: block;
+}
+
+.navbar-name {
+    font-family: var(--font-primary);
+    font-size: 0.875rem;
+    /* 14px */
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+
+/* ===== NAVBAR TOGGLE (Icono Hamburguesa) ===== */
+
+.navbar-toggle {
+    /* Reset botón */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-xs);
+
+    /* Estilo */
+    color: var(--color-text-primary);
+    font-size: 1.25rem;
+    line-height: 1;
+
+    /* Transiciones */
+    transition: color var(--transition-base);
+}
+
+.navbar-toggle:hover,
+.navbar-toggle:active {
+    color: var(--color-accent-5);
+    /* #F9C74F */
+}
+
+.navbar-toggle:focus {
+    outline: none;
+}
+
+.navbar-toggle-icon {
+    display: block;
+}
+
+
+/* ===== NAVBAR DROPDOWN (Menú Desplegable) ===== */
+
+.navbar-dropdown {
+    /* Posicionamiento */
+    position: absolute;
+    top: calc(100% + var(--spacing-xs));
+    right: 0;
+    z-index: 999;
+
+    /* Dimensiones */
+    width: 200px;
+    min-height: 150px;
+    padding: var(--spacing-sm);
+
+    /* Estilo - Mismo que navbar principal */
+    background-color: var(--color-bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--navbar-border-color);
+    border-radius: var(--radius-xl);
+    box-shadow:
+        var(--shadow-navbar),
+        var(--shadow-glow-subtle),
+        var(--shadow-inset-glow);
+
+    /* Estado inicial: oculto */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+
+    /* Transiciones */
+    transition:
+        opacity var(--transition-base),
+        visibility var(--transition-base),
+        transform var(--transition-base);
+}
+
+/* Estado activo del menú */
+.navbar-dropdown.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Fallback para navegadores sin backdrop-filter */
+@supports not (backdrop-filter: blur(12px)) {
+    .navbar-dropdown {
+        background-color: var(--navbar-bg);
+    }
+}
 
 /* ===== FOOTER ===== */
 
