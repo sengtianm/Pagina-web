@@ -99,3 +99,51 @@ Este archivo es la fuente de verdad sobre el avance del proyecto. El agente de A
 - Logo visible en pestaña del navegador (favicon)
 - Logo clickeable que lleva al inicio (#home)
 
+---
+
+### ✅ [20-ENE-2026] - Barra de Navegación Flotante
+
+**Estado:** Completado
+
+**Cambios Realizados:**
+- Creada barra de navegación flotante tipo "isla" centrada
+- Implementado efecto visual 3D suave con iluminación sutil
+- Navbar fija que permanece visible al hacer scroll
+
+**Archivos Modificados:**
+- `css/variables.css` - Nuevas variables: `--navbar-height`, `--navbar-top-offset`, `--navbar-max-width`, `--navbar-bg`, `--navbar-border-color`, `--navbar-glow`
+- `css/layout.css` - Nuevos estilos `.navbar-floating` (reemplazan estilos del header anterior)
+- `index.html` - Nuevo elemento `<nav class="navbar-floating">` (reemplaza el header anterior)
+
+**Especificaciones Técnicas:**
+- ✅ Altura fija: 40px
+- ✅ Separación del borde superior: 20px
+- ✅ Ancho máximo: 600px (espacio para ~7 secciones)
+- ✅ Bordes redondeados (16px)
+- ✅ Fondo igual a página (#242124)
+- ✅ Borde sutil más claro (rgba blanco 8%)
+- ✅ Sombra y glow para efecto 3D suave
+- ✅ Posición fija centrada (visible al scroll)
+- ✅ Navbar vacía (sin contenido, como solicitado)
+
+**Instrucciones de Verificación:**
+
+1. **Abrir el archivo:**
+   - Ve a la carpeta `Proyectos\Pagina-web`
+   - Haz doble clic en `index.html`
+
+2. **Verificar visualmente:**
+   - ✅ La barra debe aparecer centrada en la parte superior
+   - ✅ Debe haber espacio entre la barra y el borde superior
+   - ✅ La barra tiene bordes redondeados y un borde sutil más claro
+   - ✅ Se nota un efecto de sombra suave (3D)
+   - ✅ La barra está vacía (sin links ni contenido)
+
+3. **Probar scroll:**
+   - Haz scroll hacia abajo en la página
+   - ✅ La barra debe permanecer visible en la misma posición
+
+**Próximos Pasos Sugeridos:**
+- Agregar enlaces de navegación dentro de la barra
+- Implementar logo en la barra
+- Añadir efectos hover en los enlaces

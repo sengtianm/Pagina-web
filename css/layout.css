@@ -29,32 +29,35 @@ section {
 }
 
 
-/* ===== HEADER Y FOOTER ===== */
+/* ===== NAVBAR FLOTANTE ===== */
 
-header {
-    padding: var(--spacing-lg) 0;
-    position: sticky;
-    top: 0;
+.navbar-floating {
+    /* Posicionamiento fijo centrado */
+    position: fixed;
+    top: var(--navbar-top-offset);
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 1000;
-    background-color: var(--color-bg-primary);
+
+    /* Dimensiones */
+    width: 90%;
+    max-width: var(--navbar-max-width);
+    height: var(--navbar-height);
+
+    /* Efecto isla flotante */
+    background-color: var(--navbar-bg);
+    border: 1px solid var(--navbar-border-color);
+    border-radius: var(--radius-xl);
+
+    /* Iluminación sutil / efecto 3D suave */
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.3),
+        0 0 0 1px var(--navbar-glow),
+        inset 0 1px 0 var(--navbar-glow);
 }
 
-/* Logo en el Header */
-.logo {
-    display: inline-block;
-    line-height: 0;
-    transition: opacity 0.3s ease;
-}
 
-.logo:hover {
-    opacity: 0.8;
-}
-
-.logo-img {
-    height: 40px;
-    width: auto;
-    display: block;
-}
+/* ===== FOOTER ===== */
 
 footer {
     padding: var(--spacing-xl) 0;

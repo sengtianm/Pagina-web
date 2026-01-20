@@ -67,4 +67,14 @@
     
     --container-max-width: 1200px;
     --container-padding: 2rem;
+    
+    
+    /* ===== NAVBAR FLOTANTE ===== */
+    
+    --navbar-height: 40px;
+    --navbar-top-offset: 20px;
+    --navbar-max-width: 600px;
+    --navbar-bg: var(--color-bg-primary);
+    --navbar-border-color: rgba(255, 255, 255, 0.08);
+    --navbar-glow: rgba(255, 255, 255, 0.03);
 }
