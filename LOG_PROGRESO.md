@@ -260,3 +260,31 @@ Este archivo es la fuente de verdad sobre el avance del proyecto. El agente de A
 1. Haz clic en ☰ para abrir menú
 2. Clic fuera cierra el menú
 3. Tecla Escape también cierra
+
+---
+
+### ✅ [20-ENE-2026] - Sistema de Navegación por Estados
+
+**Estado:** Completado
+
+**Estados del Sistema:**
+| Ubicación | Navbar | Logo Flotante |
+|-----------|--------|---------------|
+| Home | ✅ Visible | ❌ Oculto |
+| Fuera Home | ❌ Oculto | ✅ Visible |
+
+**Características:**
+- Logo flotante más grande (32px vs 24px)
+- Transiciones suaves (fade + scale)
+- Throttle para rendimiento óptimo
+- Nunca ambos visibles simultáneamente
+
+**Archivos Modificados:**
+- `css/layout.css` - +60 líneas (estados + logo flotante)
+- `js/menu.js` - +50 líneas (detección scroll)
+- `index.html` - Logo flotante independiente
+
+**Verificación:**
+1. En Home: navbar visible
+2. Scroll abajo: navbar desaparece, logo flotante aparece
+3. Scroll arriba: navbar reaparece

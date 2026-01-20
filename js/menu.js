@@ -39,3 +39,53 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+
+/**
+ * NAVEGACIÓN POR ESTADOS
+ * =======================
+ * Controla la visibilidad de navbar y logo flotante según scroll
+ * - Home: navbar visible, logo flotante oculto
+ * - Fuera Home: navbar oculta, logo flotante visible
+ */
+
+document.addEventListener('DOMContentLoaded', function () {
+    const navbar = document.querySelector('.navbar-floating');
+    const logoFloating = document.querySelector('.logo-floating');
+    const homeSection = document.querySelector('#home');
+
+    if (!navbar || !logoFloating || !homeSection) return;
+
+    // Throttle para optimizar rendimiento
+    let ticking = false;
+
+    function updateNavigationState() {
+        const homeBottom = homeSection.getBoundingClientRect().bottom;
+        const threshold = 100; // Margen antes de cambiar estado
+
+        if (homeBottom > threshold) {
+            // Usuario en Home: navbar visible, logo oculto
+            navbar.classList.remove('is-hidden');
+            logoFloating.classList.remove('is-visible');
+        } else {
+            // Usuario fuera de Home: navbar oculta, logo visible
+            navbar.classList.add('is-hidden');
+            logoFloating.classList.add('is-visible');
+        }
+
+        ticking = false;
+    }
+
+    function onScroll() {
+        if (!ticking) {
+            window.requestAnimationFrame(updateNavigationState);
+            ticking = true;
+        }
+    }
+
+    // Escuchar scroll
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Estado inicial
+    updateNavigationState();
+});

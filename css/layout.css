@@ -67,12 +67,19 @@ section {
         var(--shadow-inset-glow);
 
     /* Optimización de rendimiento */
-    will-change: transform;
+    will-change: opacity;
 
-    /* Transiciones para futuros efectos interactivos */
+    /* Transiciones para estados y efectos */
     transition:
         box-shadow var(--transition-base),
-        background-color var(--transition-base);
+        background-color var(--transition-base),
+        opacity 500ms ease;
+}
+
+/* Estado oculto de navbar */
+.navbar-floating.is-hidden {
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* Fallback para navegadores sin soporte de backdrop-filter */
@@ -113,6 +120,49 @@ section {
     white-space: nowrap;
 }
 
+
+/* ===== LOGO FLOTANTE INDEPENDIENTE ===== */
+
+.logo-floating {
+    /* Posicionamiento fijo esquina superior izquierda */
+    position: fixed;
+    top: var(--navbar-top-offset);
+    left: var(--spacing-lg);
+    z-index: 1000;
+
+    /* Estilo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+
+    /* Estado inicial: oculto */
+    opacity: 0;
+    visibility: hidden;
+
+    /* Transición solo opacidad 0.5s */
+    transition:
+        opacity 500ms ease,
+        visibility 500ms ease;
+}
+
+/* Estado visible del logo flotante */
+.logo-floating.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.logo-floating:hover {
+    opacity: 0.85;
+}
+
+.logo-floating-img {
+    height: 32px;
+    /* Más grande que en navbar (24px) */
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
 
 /* ===== NAVBAR TOGGLE (Icono Hamburguesa) ===== */
 
