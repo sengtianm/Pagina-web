@@ -441,3 +441,390 @@ La barra de navegación está completamente terminada con:
 - ✅ Variables CSS centralizadas
 - ✅ Código limpio y documentado
 
+---
+
+### ✅ [21-ENE-2026] - Sistema i18n FASE 1: Infraestructura Base
+
+**Estado:** Completado
+
+**Descripción:**
+Implementada la infraestructura base del sistema de internacionalización (i18n) sin afectar la UI existente. El sistema permite cargar y cambiar idiomas por consola para pruebas.
+
+**Archivos Creados:**
+- `js/i18n.config.js` - Configuración centralizada (idiomas soportados, idioma por defecto, rutas)
+- `js/i18n.js` - Motor principal de internacionalización
+- `locales/es.json` - Diccionario de traducciones en español
+- `locales/en.json` - Diccionario de traducciones en inglés
+
+**Archivos Modificados:**
+- `index.html` - Agregados scripts de i18n (sin conectar al DOM)
+
+**Estructura del Sistema:**
+```
+📁 Pagina-web/
+├── 📁 js/
+│   ├── i18n.config.js  ← Configuración
+│   ├── i18n.js         ← Motor
+│   └── navigation.js
+├── 📁 locales/
+│   ├── es.json         ← Español
+│   └── en.json         ← Inglés
+└── index.html
+```
+
+**Características Implementadas:**
+- ✅ Detección automática de idioma (localStorage → navigator.language → fallback)
+- ✅ Normalización de códigos (en-US → en)
+- ✅ Validación contra lista de idiomas soportados
+- ✅ Cache en memoria para rendimiento
+- ✅ API expuesta en `window.i18n` para consola
+- ✅ Configuración externalizada (sin valores hardcodeados)
+
+**Restricciones Respetadas:**
+- ❌ NO se modificó estructura HTML existente
+- ❌ NO se modificó navbar
+- ❌ NO se modificaron estilos ni layout
+- ❌ NO se reemplazaron textos
+
+**Instrucciones de Verificación:**
+
+1. **Abrir la página:**
+   - Abre `index.html` con un servidor local (Live Server, etc.)
+   - Nota: Requiere servidor por las peticiones `fetch()` a los JSON
+
+2. **Abrir consola del navegador:**
+   - Presiona `F12` y ve a la pestaña "Console"
+
+3. **Probar comandos:**
+   ```javascript
+   // Ver idioma actual
+   i18n.getLang()           // → 'es'
+
+   // Cambiar a inglés
+   i18n.setLang('en')       // → true
+
+   // Verificar cambio
+   i18n.getLang()           // → 'en'
+
+   // Obtener traducción
+   i18n.t('nav.home')       // → 'Home'
+   i18n.t('hero.title')     // → 'Operating & Decision Systems Designer'
+
+   // Ver idiomas disponibles
+   i18n.getSupportedLanguages()  // → ['es', 'en']
+
+   // Ver cache cargadas
+   i18n.getCache()
+   ```
+
+4. **Verificar persistencia:**
+   - Recarga la página
+   - Ejecuta `i18n.getLang()` → debe mantener 'en'
+
+**Próximos Pasos (FASE 2):**
+- Conectar el motor al DOM
+- Agregar selector de idioma en navbar
+- Implementar actualización dinámica de textos
+
+---
+
+### ✅ [21-ENE-2026] - Sistema i18n FASE 2: Conexión Mínima DOM
+
+**Estado:** Completado y Verificado
+
+---
+
+#### 📋 Objetivo de la Fase
+
+Conectar el motor i18n al HTML de forma limitada para validar la integración técnica antes de la migración completa. Esta fase fue una **prueba de concepto**, no una migración total.
+
+---
+
+#### 🔧 Cambios Realizados
+
+**Archivo: `js/i18n.js`**
+
+1. **Nueva función `applyTranslations()`**
+   - Lee todos los nodos con atributo `data-i18n`
+   - Busca la clave en el diccionario cargado
+   - Reemplaza solo `textContent` (no innerHTML)
+   - Retorna cantidad de elementos traducidos
+
+```javascript
+applyTranslations() {
+    if (!isInitialized) return 0;
+    let count = 0;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const value = this.t(key);
+        if (value && value !== key) {
+            el.textContent = value;
+            count++;
+        }
+    });
+    console.log(`[i18n] ✓ ${count} elementos traducidos`);
+    return count;
+}
+```
+
+2. **Modificación a `setLang()`**
+   - Ahora llama automáticamente a `applyTranslations()` después de cambiar el idioma
+   - Esto permite actualización en tiempo real al hacer clic en los botones
+
+---
+
+**Archivo: `index.html`**
+
+1. **4 textos de prueba agregados** (fuera de navbar):
+
+| Elemento | Clave i18n | Ubicación | Texto ES | Texto EN |
+|----------|------------|-----------|----------|----------|
+| H1 | `hero.title` | `#home` | Diseñador de Sistemas... | Operating & Decision... |
+| P | `hero.subtitle` | `#home` | Arquitectura organizacional... | Organizational architecture... |
+| H2 | `about.title` | `#sobre-mi` | Sobre Mí | About Me |
+| P | `footer.rights` | `footer` | Todos los derechos reservados | All rights reserved |
+
+2. **Selector de idioma temporal**
+   - Ubicación: esquina inferior derecha (position: fixed)
+   - ID: `i18n-test-selector`
+   - Botones simples: ES / EN
+   - Estilos inline (no CSS externo)
+   - No toca navbar ni layout
+
+```html
+<div id="i18n-test-selector" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; background: rgba(0,0,0,0.8); padding: 10px; border-radius: 8px;">
+    <button onclick="i18n.setLang('es')">ES</button>
+    <button onclick="i18n.setLang('en')">EN</button>
+</div>
+```
+
+3. **Bloque de inicialización actualizado**
+   - Al cargar página → `i18n.init()` + `applyTranslations()`
+   - Al cambiar idioma → `setLang()` llama automáticamente a `applyTranslations()`
+
+---
+
+#### ✅ Verificación Realizada
+
+| Criterio | Resultado |
+|----------|-----------|
+| Aparecen los 4 textos de prueba | ✅ Sí |
+| Cambian ES ⇄ EN | ✅ Sí |
+| Nada más cambia | ✅ Sí |
+| Navbar intacta | ✅ Sí |
+| Animaciones intactas | ✅ Sí |
+| Sin errores en consola | ⚠️ Solo CORS con `file://` |
+| Al borrar bloque prueba, web queda igual | ✅ Sí |
+
+**Nota:** Las advertencias CORS solo ocurren al abrir con `file://`. Usando un servidor local (Live Server, http-server, etc.) no aparecen.
+
+---
+
+#### 🚫 Restricciones Respetadas
+
+- ❌ NO se refactorizó estructura HTML
+- ❌ NO se rediseñó navbar
+- ❌ NO se modificaron estilos ni layout
+- ❌ NO se migró todo el contenido
+- ❌ NO se tocaron componentes críticos
+
+---
+
+#### 📁 Estructura de Archivos Afectados
+
+```
+📁 Pagina-web/
+├── 📁 js/
+│   ├── i18n.config.js  ← Sin cambios
+│   ├── i18n.js         ← +applyTranslations(), setLang() modificado
+│   └── navigation.js   ← Sin cambios
+├── 📁 locales/
+│   ├── es.json         ← Sin cambios
+│   └── en.json         ← Sin cambios
+└── index.html          ← +4 textos data-i18n, +selector temporal
+```
+
+---
+
+#### 🎯 Conclusión
+
+**FASE 2 SUPERADA.** La integración técnica del motor i18n con el DOM es viable y funciona correctamente. El sistema está listo para la migración completa en **FASE 3**.
+
+**Próximos Pasos (FASE 3):**
+- Migrar todos los textos estáticos al sistema i18n
+- Diseñar selector de idioma integrado en navbar
+- Actualizar metatags y atributo `lang` del HTML según idioma
+- Eliminar textos de prueba y selector temporal
+
+---
+
+### ✅ [21-ENE-2026] - Sistema i18n FASE 3 Parcial: Migrar Navbar y Metadatos
+
+**Estado:** Completado
+
+---
+
+#### 📋 Alcance de la Fase
+
+Migración parcial de componentes existentes (las secciones del sitio están vacías):
+- Navbar (8 enlaces)
+- `<title>`
+- `<meta description>`
+- `aria-labels`
+- Selector de idioma real
+
+---
+
+#### 🔧 Cambios Realizados
+
+**1. JSONs Actualizados** (`/locales/es.json` y `/locales/en.json`)
+
+Nuevas secciones agregadas:
+
+```json
+{
+    "meta": {
+        "title": "Portafolio Profesional",
+        "description": "Portafolio profesional de Diseñador de Sistemas..."
+    },
+    "nav": {
+        "aboutMe": "Sobre mí",
+        "howITransform": "Cómo transformo",
+        "projects": "Proyectos",
+        "services": "Servicios",
+        "contact": "Contacto",
+        "models": "Modelos",
+        "howIWork": "Cómo trabajo",
+        "profile": "Perfil profesional"
+    },
+    "aria": {
+        "goHome": "Ir al inicio",
+        "mainNav": "Navegación principal",
+        "openMenu": "Abrir menú",
+        "logo": "Logo - Ir al inicio",
+        "logoAlt": "Logo"
+    },
+    "langSelector": {
+        "es": "Español",
+        "en": "English"
+    }
+}
+```
+
+---
+
+**2. Motor i18n Extendido** (`js/i18n.js`)
+
+Función `applyTranslations()` mejorada:
+
+| Funcionalidad | Descripción |
+|---------------|-------------|
+| `data-i18n="clave"` | Reemplaza `textContent` |
+| `data-i18n-attr="attr:clave"` | Reemplaza atributos (aria-label, alt, etc.) |
+| `<html lang="">` | Se actualiza automáticamente al idioma activo |
+| `<title>` | Se actualiza dinámicamente desde `meta.title` |
+| `<meta description>` | Se actualiza dinámicamente desde `meta.description` |
+| Preservación | Si una clave no existe, el texto original permanece |
+
+---
+
+**3. HTML Migrado** (`index.html`)
+
+Enlaces de navbar principal:
+```html
+<a href="#sobre-mi" class="navbar-link" data-i18n="nav.aboutMe">Sobre mí</a>
+<a href="#como-transformo" class="navbar-link" data-i18n="nav.howITransform">Cómo transformo</a>
+<!-- etc. -->
+```
+
+Enlaces de dropdown:
+```html
+<a href="#modelos" class="dropdown-link" data-i18n="nav.models">Modelos</a>
+<a href="#como-trabajo" class="dropdown-link" data-i18n="nav.howIWork">Cómo trabajo</a>
+<!-- etc. -->
+```
+
+Aria-labels:
+```html
+<nav data-i18n-attr="aria-label:aria.mainNav">
+<button data-i18n-attr="aria-label:aria.openMenu">
+<img data-i18n-attr="alt:aria.logo">
+```
+
+Selector de idioma (dentro del dropdown):
+```html
+<div class="dropdown-lang-selector">
+    <button onclick="i18n.setLang('es')" data-i18n="langSelector.es">Español</button>
+    <button onclick="i18n.setLang('en')" data-i18n="langSelector.en">English</button>
+</div>
+```
+
+---
+
+**4. Estilos CSS** (`css/layout.css`)
+
+Nuevos estilos para selector de idioma:
+
+```css
+.dropdown-lang-selector { display: flex; gap: var(--spacing-xs); }
+.lang-btn { 
+    font-size: 0.75rem; 
+    border: 1px solid var(--color-border-subtle);
+    /* ... */
+}
+.lang-btn:hover { color: var(--color-accent-5); }
+```
+
+---
+
+#### ⚠️ Requisito Técnico
+
+**CORS con file://**
+
+El sistema usa `fetch()` para cargar los JSON de traducciones. Los navegadores bloquean esto con el protocolo `file://` por seguridad.
+
+**Solución:** Usar un servidor local:
+- VS Code: Extensión **Live Server**
+- Terminal: `npx http-server`
+- Python: `python -m http.server`
+
+---
+
+#### ✅ Verificación Realizada
+
+| Criterio | Resultado |
+|----------|-----------|
+| Navbar muestra 8 enlaces | ✅ |
+| Dropdown abre correctamente | ✅ |
+| Selector de idioma visible | ✅ |
+| Estilos aplicados | ✅ |
+| Motor i18n funciona (con servidor) | ✅ |
+| Traducciones bloqueadas con file:// | ⚠️ Esperado |
+
+---
+
+#### 📁 Archivos Modificados
+
+| Archivo | Cambios |
+|---------|---------|
+| `locales/es.json` | +nav, +meta, +aria, +langSelector |
+| `locales/en.json` | +nav, +meta, +aria, +langSelector |
+| `js/i18n.js` | applyTranslations() extendido |
+| `index.html` | +data-i18n en navbar, +selector idioma |
+| `css/layout.css` | +estilos .dropdown-lang-selector, .lang-btn |
+
+---
+
+#### 🎯 Conclusión
+
+**FASE 3 PARCIAL COMPLETADA.** 
+
+- Todos los componentes existentes están migrados a i18n
+- El selector de idioma está integrado en el dropdown
+- El sistema actualiza automáticamente: navbar, title, meta, html lang
+- Las secciones vacías están listas para recibir contenido i18n en el futuro
+
+**Pendiente para cuando haya contenido:**
+- Migrar textos de hero, about, services, contact, footer
+- Eliminar comentarios "Contenido pendiente"
+

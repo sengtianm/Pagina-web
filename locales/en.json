@@ -1,0 +1,56 @@
+{
+    "meta": {
+        "language": "en",
+        "name": "English",
+        "direction": "ltr",
+        "title": "Professional Portfolio",
+        "description": "Professional portfolio of Operating & Decision Systems Designer"
+    },
+    "nav": {
+        "aboutMe": "About me",
+        "howITransform": "How I transform",
+        "projects": "Projects",
+        "services": "Services",
+        "contact": "Contact",
+        "models": "Models",
+        "howIWork": "How I work",
+        "profile": "Professional profile"
+    },
+    "aria": {
+        "goHome": "Go to home",
+        "mainNav": "Main navigation",
+        "openMenu": "Open menu",
+        "logo": "Logo - Go to home",
+        "logoAlt": "Logo"
+    },
+    "langSelector": {
+        "label": "Language",
+        "es": "Español",
+        "en": "English"
+    },
+    "hero": {
+        "title": "Operating & Decision Systems Designer",
+        "subtitle": "Organizational architecture for the age of complexity",
+        "cta": "Explore Projects"
+    },
+    "about": {
+        "title": "About Me",
+        "description": "Specialist in complex systems design and decision architecture."
+    },
+    "services": {
+        "title": "Services",
+        "item1": "Systems Design",
+        "item2": "Strategic Consulting",
+        "item3": "Decision Architecture"
+    },
+    "contact": {
+        "title": "Contact",
+        "name": "Name",
+        "email": "Email",
+        "message": "Message",
+        "send": "Send"
+    },
+    "footer": {
+        "rights": "All rights reserved"
+    }
+}

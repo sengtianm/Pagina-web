@@ -26,28 +26,32 @@
 
 <body>
     <!-- Logo Flotante Independiente (visible fuera del Home) -->
-    <a href="#home" class="logo-floating" aria-label="Ir al inicio">
-        <img src="assets/images/logo-alt.svg" alt="Logo" class="logo-floating-img">
+    <a href="#home" class="logo-floating" aria-label="Ir al inicio" data-i18n-attr="aria-label:aria.goHome">
+        <img src="assets/images/logo-alt.svg" alt="Logo" class="logo-floating-img" data-i18n-attr="alt:aria.logoAlt">
     </a>
 
     <!-- Barra de Navegación Flotante (visible en Home) -->
-    <nav class="navbar-floating" role="navigation" aria-label="Navegación principal">
+    <nav class="navbar-floating" role="navigation" aria-label="Navegación principal"
+        data-i18n-attr="aria-label:aria.mainNav">
         <!-- Logo (izquierda) -->
         <a href="#home" class="navbar-brand">
-            <img src="assets/images/logo.svg" alt="Logo - Ir al inicio" class="navbar-logo">
+            <img src="assets/images/logo.svg" alt="Logo - Ir al inicio" class="navbar-logo"
+                data-i18n-attr="alt:aria.logo">
         </a>
 
-        <!-- Enlaces principales (centro) - data-priority define orden de migración (mayor = sale primero) -->
+        <!-- Enlaces principales (centro) -->
         <ul class="navbar-links" id="navbar-links">
-            <li data-priority="1"><a href="#sobre-mi" class="navbar-link">Sobre mí</a></li>
-            <li data-priority="2"><a href="#como-transformo" class="navbar-link">Cómo transformo</a></li>
-            <li data-priority="3"><a href="#proyectos" class="navbar-link">Proyectos</a></li>
-            <li data-priority="4"><a href="#servicios" class="navbar-link">Servicios</a></li>
-            <li data-priority="5"><a href="#contacto" class="navbar-link">Contacto</a></li>
+            <li data-priority="1"><a href="#sobre-mi" class="navbar-link" data-i18n="nav.aboutMe">Sobre mí</a></li>
+            <li data-priority="2"><a href="#como-transformo" class="navbar-link" data-i18n="nav.howITransform">Cómo
+                    transformo</a></li>
+            <li data-priority="3"><a href="#proyectos" class="navbar-link" data-i18n="nav.projects">Proyectos</a></li>
+            <li data-priority="4"><a href="#servicios" class="navbar-link" data-i18n="nav.services">Servicios</a></li>
+            <li data-priority="5"><a href="#contacto" class="navbar-link" data-i18n="nav.contact">Contacto</a></li>
         </ul>
 
         <!-- Icono Hamburguesa (derecha) -->
-        <button id="navbar-toggle" class="navbar-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <button id="navbar-toggle" class="navbar-toggle" aria-label="Abrir menú" aria-expanded="false"
+            data-i18n-attr="aria-label:aria.openMenu">
             <span class="navbar-toggle-icon">☰</span>
         </button>
 
@@ -59,12 +63,20 @@
             <div class="dropdown-divider" id="dropdown-divider"></div>
             <!-- Enlaces fijos del menú -->
             <ul class="dropdown-links">
-                <li><a href="#modelos" class="dropdown-link">Modelos</a></li>
-                <li><a href="#como-trabajo" class="dropdown-link">Cómo trabajo</a></li>
-                <li><a href="#perfil-profesional" class="dropdown-link">Perfil profesional</a></li>
+                <li><a href="#modelos" class="dropdown-link" data-i18n="nav.models">Modelos</a></li>
+                <li><a href="#como-trabajo" class="dropdown-link" data-i18n="nav.howIWork">Cómo trabajo</a></li>
+                <li><a href="#perfil-profesional" class="dropdown-link" data-i18n="nav.profile">Perfil profesional</a>
+                </li>
             </ul>
         </div>
     </nav>
+
+    <!-- Selector de Idioma Flotante (esquina superior derecha) -->
+    <div class="lang-selector-floating" id="lang-selector">
+        <button type="button" class="lang-btn-floating" data-lang="es" onclick="i18n.setLang('es')">ES</button>
+        <span class="lang-separator">|</span>
+        <button type="button" class="lang-btn-floating" data-lang="en" onclick="i18n.setLang('en')">EN</button>
+    </div>
 
     <!-- Contenido Principal -->
     <main>
@@ -140,6 +152,16 @@
     </footer>
 
     <!-- Scripts -->
+    <!-- Sistema i18n (FASE 1: solo infraestructura, sin conectar al DOM) -->
+    <script src="js/i18n.config.js"></script>
+    <script src="js/i18n.js"></script>
+    <script>
+        // FASE 3: Inicializar y aplicar traducciones automáticamente
+        i18n.init().then(() => {
+            i18n.applyTranslations();
+            console.log('[i18n] Sistema multilenguaje activo.');
+        });
+    </script>
     <script src="js/navigation.js"></script>
 </body>
 

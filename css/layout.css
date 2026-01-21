@@ -406,6 +406,103 @@ section {
     outline-offset: 2px;
 }
 
+/* ===== DROPDOWN LANG SELECTOR ===== */
+
+.dropdown-lang-selector {
+    display: flex;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs) 0;
+}
+
+.lang-btn {
+    /* Reset */
+    background: none;
+    border: 1px solid var(--color-border-subtle);
+    cursor: pointer;
+
+    /* Tipografía */
+    font-family: var(--font-primary);
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+
+    /* Estructura */
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-md);
+    flex: 1;
+
+    /* Transición */
+    transition:
+        color var(--transition-base),
+        border-color var(--transition-base),
+        background-color var(--transition-base);
+}
+
+.lang-btn:hover {
+    color: var(--color-accent-5);
+    border-color: var(--color-accent-5);
+}
+
+.lang-btn:focus-visible {
+    outline: 2px solid var(--color-accent-5);
+    outline-offset: 2px;
+}
+
+/* ===== SELECTOR DE IDIOMA FLOTANTE ===== */
+
+.lang-selector-floating {
+    /* Posicionamiento fijo esquina superior derecha */
+    position: fixed;
+    top: var(--navbar-top-offset);
+    right: var(--spacing-lg);
+    z-index: var(--z-navbar);
+
+    /* Centrado vertical con la navbar */
+    height: var(--navbar-height);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.lang-btn-floating {
+    /* Reset */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+
+    /* Tipografía */
+    font-family: var(--font-primary);
+    font-size: 0.8125rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.02em;
+    color: var(--color-text-primary);
+
+    /* Transición */
+    transition: color var(--transition-base);
+}
+
+.lang-btn-floating:hover {
+    color: var(--color-text-secondary);
+}
+
+/* Estado activo - idioma seleccionado */
+.lang-btn-floating.is-active {
+    color: var(--color-text-secondary);
+}
+
+.lang-btn-floating:focus-visible {
+    outline: 2px solid var(--color-text-primary);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+.lang-separator {
+    color: var(--color-text-tertiary);
+    font-size: 0.75rem;
+    user-select: none;
+}
+
 /* ===== FOOTER ===== */
 
 footer {

@@ -1,0 +1,56 @@
+{
+    "meta": {
+        "language": "es",
+        "name": "Español",
+        "direction": "ltr",
+        "title": "Portafolio Profesional",
+        "description": "Portafolio profesional de Diseñador de Sistemas Operativos y de Decisión"
+    },
+    "nav": {
+        "aboutMe": "Sobre mí",
+        "howITransform": "Cómo transformo",
+        "projects": "Proyectos",
+        "services": "Servicios",
+        "contact": "Contacto",
+        "models": "Modelos",
+        "howIWork": "Cómo trabajo",
+        "profile": "Perfil profesional"
+    },
+    "aria": {
+        "goHome": "Ir al inicio",
+        "mainNav": "Navegación principal",
+        "openMenu": "Abrir menú",
+        "logo": "Logo - Ir al inicio",
+        "logoAlt": "Logo"
+    },
+    "langSelector": {
+        "label": "Idioma",
+        "es": "Español",
+        "en": "English"
+    },
+    "hero": {
+        "title": "Diseñador de Sistemas Operativos y de Decisión",
+        "subtitle": "Arquitectura organizacional para la era de la complejidad",
+        "cta": "Explorar Proyectos"
+    },
+    "about": {
+        "title": "Sobre Mí",
+        "description": "Especialista en diseño de sistemas complejos y arquitectura de decisión."
+    },
+    "services": {
+        "title": "Servicios",
+        "item1": "Diseño de Sistemas",
+        "item2": "Consultoría Estratégica",
+        "item3": "Arquitectura de Decisión"
+    },
+    "contact": {
+        "title": "Contacto",
+        "name": "Nombre",
+        "email": "Correo electrónico",
+        "message": "Mensaje",
+        "send": "Enviar"
+    },
+    "footer": {
+        "rights": "Todos los derechos reservados"
+    }
+}
