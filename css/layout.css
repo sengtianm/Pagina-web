@@ -342,12 +342,18 @@ section {
     white-space: nowrap;
 }
 
+.overflow-links li {
+    white-space: nowrap;
+}
+
 /* ===== DROPDOWN DIVIDER ===== */
 
 .dropdown-divider {
     height: 1px;
     background-color: var(--color-border-subtle);
     margin: var(--spacing-xs) 0;
+    /* Transición suave al aparecer/desaparecer */
+    transition: opacity var(--transition-base);
 }
 
 /* Oculto cuando no hay enlaces migrados */

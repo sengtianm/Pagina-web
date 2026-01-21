@@ -98,9 +98,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (!navbarLinks || !overflowLinks || !navbar || !logo || !toggleBtn) return;
 
-    // Configuración
-    const PADDING_SAFETY = 60; // Margen de seguridad en px
-    const GAP = 24; // Gap entre elementos (--spacing-md)
+    // Configuración - Leer de CSS custom properties para mantenibilidad centralizada
+    const rootStyles = getComputedStyle(document.documentElement);
+    const PADDING_SAFETY = parseInt(rootStyles.getPropertyValue('--nav-padding-safety')) || 60;
+    const GAP = parseInt(rootStyles.getPropertyValue('--nav-gap')) || 24;
 
     // Guardar referencias originales de los enlaces
     const originalLinks = Array.from(navbarLinks.querySelectorAll('li[data-priority]'));
@@ -241,7 +242,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Event listeners
     window.addEventListener('resize', onResize, { passive: true });
-    window.addEventListener('orientationchange', onResize);
+
+    // Orientationchange con debounce adicional para evitar múltiples disparos
+    let orientationTimeout = null;
+    window.addEventListener('orientationchange', function () {
+        if (orientationTimeout) clearTimeout(orientationTimeout);
+        orientationTimeout = setTimeout(updateOverflow, 150);
+    });
 
     // Estado inicial (con pequeño delay para asegurar renders)
     setTimeout(updateOverflow, 100);

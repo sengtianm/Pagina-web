@@ -134,4 +134,11 @@
     --z-modal: 1100;
     --z-tooltip: 1200;
     --z-toast: 1300;
+
+
+    /* ===== SISTEMA ADAPTATIVO ===== */
+    /* Configuración para navegación responsive dinámica */
+
+    --nav-gap: 24px;
+    --nav-padding-safety: 60px;
 }
