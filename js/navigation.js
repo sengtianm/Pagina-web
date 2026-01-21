@@ -260,5 +260,44 @@ document.addEventListener('DOMContentLoaded', function () {
     if (document.fonts && document.fonts.ready) {
         document.fonts.ready.then(updateOverflow);
     }
+
+    // ===== SELECTOR DE IDIOMA ADAPTATIVO =====
+
+    const dropdownLangSection = document.getElementById('dropdown-lang-section');
+
+    /**
+     * Verifica si el selector de idioma flotante se superpone con la navbar
+     * y lo migra al dropdown si es necesario
+     */
+    function updateLangSelectorPosition() {
+        if (!langSelector || !navbar || !dropdownLangSection) return;
+
+        // Temporalmente mostrar para poder medir correctamente
+        langSelector.style.display = 'flex';
+
+        const navbarRect = navbar.getBoundingClientRect();
+        const selectorRect = langSelector.getBoundingClientRect();
+
+        // Calcular si hay superposición (dejando 20px de margen)
+        const isOverlapping = selectorRect.left < (navbarRect.right + 20);
+
+        if (isOverlapping) {
+            // Ocultar flotante, mostrar en dropdown
+            langSelector.style.display = 'none';
+            dropdownLangSection.classList.add('is-visible');
+        } else {
+            // Mantener flotante visible, ocultar en dropdown
+            langSelector.style.display = 'flex';
+            dropdownLangSection.classList.remove('is-visible');
+        }
+    }
+
+    // Ejecutar al cargar y al redimensionar
+    window.addEventListener('resize', updateLangSelectorPosition, { passive: true });
+    setTimeout(updateLangSelectorPosition, 150);
+
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(updateLangSelectorPosition);
+    }
 });
 

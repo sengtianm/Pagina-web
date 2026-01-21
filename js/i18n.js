@@ -255,8 +255,8 @@
                 });
             });
 
-            // 6. Actualizar selector de idioma
-            document.querySelectorAll('.lang-btn-floating').forEach(btn => {
+            // 6. Actualizar selector de idioma (flotante y dropdown)
+            document.querySelectorAll('.lang-btn-floating, .lang-btn-dropdown').forEach(btn => {
                 const lang = btn.getAttribute('data-lang');
                 if (lang === currentLanguage) {
                     btn.classList.add('is-active');

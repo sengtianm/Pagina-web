@@ -29,6 +29,456 @@ section {
 }
 
 
+/* ===== NAVBAR FLOTANTE ===== */
+
+.navbar-floating {
+    /* Posicionamiento fijo centrado */
+    position: fixed;
+    top: var(--navbar-top-offset);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: var(--z-navbar);
+
+    /* Dimensiones */
+    width: 90%;
+    max-width: var(--navbar-max-width);
+    height: var(--navbar-height);
+
+    /* Estructura interna - Flexbox */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+    padding: 0 var(--spacing-lg);
+
+    /* Efecto isla flotante con glassmorphism */
+    background-color: var(--color-bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--navbar-border-color);
+    border-radius: var(--radius-xl);
+
+    /* Sombras */
+    box-shadow:
+        var(--shadow-navbar),
+        var(--shadow-glow-subtle),
+        var(--shadow-inset-glow);
+
+    /* Optimización */
+    will-change: opacity;
+
+    /* Transiciones */
+    transition:
+        box-shadow var(--transition-base),
+        background-color var(--transition-base),
+        opacity 1000ms ease;
+}
+
+/* Estado oculto de navbar */
+.navbar-floating.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Fallback para navegadores sin backdrop-filter */
+@supports not (backdrop-filter: blur(12px)) {
+    .navbar-floating {
+        background-color: var(--navbar-bg);
+    }
+}
+
+
+/* ===== NAVBAR BRAND (Logo) ===== */
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    text-decoration: none;
+    color: var(--color-text-primary);
+    transition: opacity var(--transition-base);
+}
+
+.navbar-brand:hover {
+    opacity: 0.85;
+}
+
+.navbar-logo {
+    height: 24px;
+    width: auto;
+    display: block;
+}
+
+.navbar-name {
+    font-family: var(--font-primary);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+
+/* ===== NAVBAR LINKS (Enlaces principales centrados) ===== */
+
+.navbar-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+
+    /* Centrado absoluto */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+
+.navbar-link {
+    font-family: var(--font-primary);
+    font-size: 0.8125rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    text-decoration: none;
+    color: var(--color-text-primary);
+
+    transition:
+        color var(--transition-base),
+        transform 200ms ease;
+
+    display: inline-block;
+}
+
+/* Estado oculto para enlaces migrados */
+.navbar-links li.is-hidden {
+    display: none;
+}
+
+.navbar-link:hover,
+.navbar-link:active {
+    color: var(--color-accent-5);
+    transform: scale(1.05);
+}
+
+.navbar-link:focus-visible {
+    outline: 2px solid var(--color-accent-5);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+
+/* ===== LOGO FLOTANTE INDEPENDIENTE ===== */
+
+.logo-floating {
+    position: fixed;
+    top: var(--navbar-top-offset);
+    left: var(--spacing-lg);
+    z-index: var(--z-navbar);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+
+    /* Estado inicial: oculto */
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 1000ms ease,
+        visibility 1000ms ease;
+}
+
+.logo-floating.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.logo-floating:hover {
+    opacity: 0.85;
+}
+
+.logo-floating-img {
+    height: 40px;
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 2px 8px var(--color-shadow-dark));
+}
+
+
+/* ===== NAVBAR TOGGLE (Hamburguesa) ===== */
+
+.navbar-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-xs);
+    color: var(--color-text-primary);
+    font-size: 1.25rem;
+    line-height: 1;
+    transition: color var(--transition-base);
+}
+
+.navbar-toggle:hover,
+.navbar-toggle:active {
+    color: var(--color-accent-5);
+}
+
+.navbar-toggle:focus {
+    outline: none;
+}
+
+.navbar-toggle:focus-visible {
+    outline: 2px solid var(--color-accent-5);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+.navbar-toggle-icon {
+    display: block;
+}
+
+
+/* ===== NAVBAR DROPDOWN ===== */
+
+.navbar-dropdown {
+    position: absolute;
+    top: calc(100% + var(--spacing-xs));
+    right: 0;
+    z-index: var(--z-dropdown);
+
+    width: auto;
+    min-width: 180px;
+    max-width: 280px;
+    padding: var(--spacing-sm);
+
+    background-color: var(--color-bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--navbar-border-color);
+    border-radius: var(--radius-xl);
+    box-shadow:
+        var(--shadow-navbar),
+        var(--shadow-glow-subtle),
+        var(--shadow-inset-glow);
+
+    /* Estado inicial: oculto */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+
+    transition:
+        opacity var(--transition-base),
+        visibility var(--transition-base),
+        transform var(--transition-base);
+}
+
+.navbar-dropdown.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+@supports not (backdrop-filter: blur(12px)) {
+    .navbar-dropdown {
+        background-color: var(--navbar-bg);
+    }
+}
+
+
+/* ===== OVERFLOW LINKS ===== */
+
+.overflow-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.overflow-links:empty {
+    display: none;
+}
+
+.overflow-links .navbar-link {
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-regular);
+    display: block;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-md);
+    white-space: nowrap;
+}
+
+.overflow-links li {
+    white-space: nowrap;
+}
+
+
+/* ===== DROPDOWN DIVIDER ===== */
+
+.dropdown-divider {
+    height: 1px;
+    background-color: var(--color-border-subtle);
+    margin: var(--spacing-xs) 0;
+    transition: opacity var(--transition-base);
+}
+
+.overflow-links:empty+.dropdown-divider {
+    display: none;
+}
+
+
+/* ===== DROPDOWN LINKS ===== */
+
+.dropdown-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.dropdown-link {
+    font-family: var(--font-primary);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-regular);
+    text-decoration: none;
+    color: var(--color-text-primary);
+
+    display: block;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-md);
+
+    transition:
+        color var(--transition-base),
+        background-color var(--transition-base);
+}
+
+.dropdown-link:hover,
+.dropdown-link:active {
+    color: var(--color-accent-5);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.dropdown-link:focus-visible {
+    outline: 2px solid var(--color-accent-5);
+    outline-offset: 2px;
+}
+
+
+/* ===== SELECTOR DE IDIOMA EN DROPDOWN ===== */
+
+.dropdown-lang-section {
+    display: none;
+    /* Oculto por defecto, visible cuando no hay espacio */
+}
+
+.dropdown-lang-section.is-visible {
+    display: block;
+}
+
+.dropdown-lang-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) 0;
+}
+
+.lang-btn-dropdown {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-md);
+
+    font-family: var(--font-primary);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.02em;
+    color: var(--color-text-primary);
+
+    transition:
+        color var(--transition-base),
+        background-color var(--transition-base);
+}
+
+.lang-btn-dropdown:hover {
+    color: var(--color-accent-5);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.lang-btn-dropdown.is-active {
+    color: var(--color-accent-5);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+
+/* ===== SELECTOR DE IDIOMA FLOTANTE ===== */
+
+.lang-selector-floating {
+    position: fixed;
+    top: var(--navbar-top-offset);
+    right: var(--spacing-lg);
+    z-index: var(--z-navbar);
+
+    height: var(--navbar-height);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+
+    transition: opacity 1000ms ease;
+}
+
+.lang-selector-floating.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.lang-btn-floating {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-md);
+
+    font-family: var(--font-primary);
+    font-size: 0.8125rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.02em;
+    color: var(--color-text-primary);
+
+    transition:
+        color var(--transition-base),
+        background-color var(--transition-base);
+}
+
+.lang-btn-floating:hover {
+    color: var(--color-accent-5);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.lang-btn-floating.is-active {
+    color: var(--color-accent-5);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.lang-btn-floating:focus-visible {
+    outline: 2px solid var(--color-accent-5);
+    outline-offset: 2px;
+}
+
+.lang-separator {
+    color: var(--color-text-tertiary);
+    font-size: 0.75rem;
+    user-select: none;
+}
+
+
 /* ===== FOOTER ===== */
 
 footer {
@@ -37,7 +487,7 @@ footer {
 }
 
 
-/* ===== GRID SYSTEM (Preparado para uso futuro) ===== */
+/* ===== GRID SYSTEM ===== */
 
 .grid-2 {
     display: grid;
@@ -64,18 +514,30 @@ footer {
 @media (max-width: 1024px) {
     :root {
         --font-size-h1: 2.5rem;
-        /* 40px */
         --font-size-h2: 2rem;
-        /* 32px */
         --font-size-h3: 1.75rem;
-        /* 28px */
         --font-size-h4: 1.25rem;
-        /* 20px */
         --container-padding: 1.5rem;
-
-        /* Navbar responsive - Tablet */
         --navbar-top-offset: 16px;
         --navbar-max-width: 520px;
+    }
+
+    .navbar-floating {
+        gap: var(--spacing-xs);
+        padding: 0 var(--spacing-sm);
+    }
+
+    .logo-floating {
+        left: var(--spacing-md);
+    }
+
+    .logo-floating-img {
+        height: 36px;
+    }
+
+    .navbar-dropdown {
+        width: 180px;
+        min-height: 130px;
     }
 
     .grid-4 {
@@ -91,20 +553,36 @@ footer {
 @media (max-width: 768px) {
     :root {
         --font-size-h1: 2rem;
-        /* 32px */
         --font-size-h2: 1.75rem;
-        /* 28px */
         --font-size-h3: 1.5rem;
-        /* 24px */
         --font-size-h4: 1.25rem;
-        /* 20px */
         --container-padding: 1rem;
         --spacing-2xl: 3rem;
-
-        /* Navbar responsive - Mobile */
         --navbar-top-offset: 12px;
         --navbar-height: 36px;
         --navbar-max-width: 92%;
+    }
+
+    .navbar-floating {
+        width: 94%;
+        gap: var(--spacing-xs);
+        padding: 0 var(--spacing-xs);
+        border-radius: var(--radius-lg);
+    }
+
+    .logo-floating {
+        left: var(--spacing-sm);
+        top: var(--navbar-top-offset);
+    }
+
+    .logo-floating-img {
+        height: 32px;
+    }
+
+    .navbar-dropdown {
+        width: 160px;
+        min-height: 120px;
+        padding: var(--spacing-xs);
     }
 
     section {

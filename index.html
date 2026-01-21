@@ -77,6 +77,17 @@
                 <li><a href="#perfil-profesional" class="dropdown-link" data-i18n="nav.profile">Perfil profesional</a>
                 </li>
             </ul>
+            <!-- Selector de idioma en dropdown (visible cuando no hay espacio) -->
+            <div class="dropdown-lang-section" id="dropdown-lang-section">
+                <div class="dropdown-divider"></div>
+                <div class="dropdown-lang-selector">
+                    <button type="button" class="lang-btn-dropdown" data-lang="es"
+                        onclick="i18n.setLang('es')">ES</button>
+                    <span class="lang-separator">|</span>
+                    <button type="button" class="lang-btn-dropdown" data-lang="en"
+                        onclick="i18n.setLang('en')">EN</button>
+                </div>
+            </div>
         </div>
     </nav>
 
