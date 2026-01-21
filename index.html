@@ -37,22 +37,27 @@
             <img src="assets/images/logo.svg" alt="Logo - Ir al inicio" class="navbar-logo">
         </a>
 
-        <!-- Enlaces principales (centro) -->
-        <ul class="navbar-links">
-            <li><a href="#sobre-mi" class="navbar-link">Sobre mí</a></li>
-            <li><a href="#como-ayudo" class="navbar-link">Cómo transformo</a></li>
-            <li><a href="#proyectos" class="navbar-link">Proyectos</a></li>
-            <li><a href="#servicios" class="navbar-link">Servicios</a></li>
-            <li><a href="#contacto" class="navbar-link">Contacto</a></li>
+        <!-- Enlaces principales (centro) - data-priority define orden de migración (mayor = sale primero) -->
+        <ul class="navbar-links" id="navbar-links">
+            <li data-priority="1"><a href="#sobre-mi" class="navbar-link">Sobre mí</a></li>
+            <li data-priority="2"><a href="#como-transformo" class="navbar-link">Cómo transformo</a></li>
+            <li data-priority="3"><a href="#proyectos" class="navbar-link">Proyectos</a></li>
+            <li data-priority="4"><a href="#servicios" class="navbar-link">Servicios</a></li>
+            <li data-priority="5"><a href="#contacto" class="navbar-link">Contacto</a></li>
         </ul>
 
         <!-- Icono Hamburguesa (derecha) -->
-        <button class="navbar-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <button id="navbar-toggle" class="navbar-toggle" aria-label="Abrir menú" aria-expanded="false">
             <span class="navbar-toggle-icon">☰</span>
         </button>
 
         <!-- Menú Desplegable -->
-        <div class="navbar-dropdown" aria-hidden="true">
+        <div class="navbar-dropdown" aria-hidden="true" aria-labelledby="navbar-toggle">
+            <!-- Sección para enlaces migrados dinámicamente -->
+            <ul class="overflow-links" id="overflow-links"></ul>
+            <!-- Separador (visible solo cuando hay enlaces migrados) -->
+            <div class="dropdown-divider" id="dropdown-divider"></div>
+            <!-- Enlaces fijos del menú -->
             <ul class="dropdown-links">
                 <li><a href="#modelos" class="dropdown-link">Modelos</a></li>
                 <li><a href="#como-trabajo" class="dropdown-link">Cómo trabajo</a></li>
@@ -77,8 +82,8 @@
             </div>
         </section>
 
-        <!-- Sección: Cómo ayudo -->
-        <section id="como-ayudo">
+        <!-- Sección: Cómo transformo -->
+        <section id="como-transformo">
             <div class="container">
                 <!-- Contenido pendiente -->
             </div>

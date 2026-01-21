@@ -1,7 +1,8 @@
 /**
  * SISTEMA DE NAVEGACIÓN
  * =====================
- * Controla el menú hamburguesa y la navegación por estados (scroll)
+ * Controla el menú hamburguesa, navegación por estados (scroll),
+ * y sistema adaptativo de transferencia de enlaces
  */
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -11,6 +12,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const dropdown = document.querySelector('.navbar-dropdown');
     const logoFloating = document.querySelector('.logo-floating');
     const homeSection = document.querySelector('#home');
+
+    // Elementos para navegación adaptativa
+    const navbarLinks = document.getElementById('navbar-links');
+    const overflowLinks = document.getElementById('overflow-links');
+    const dropdownDivider = document.getElementById('dropdown-divider');
+    const logo = document.querySelector('.navbar-brand');
 
     // ===== MENÚ DESPLEGABLE =====
 
@@ -24,9 +31,6 @@ document.addEventListener('DOMContentLoaded', function () {
         dropdown.setAttribute('aria-hidden', 'true');
     }
 
-    /**
-     * Abre/cierra el menú al hacer clic en el icono hamburguesa
-     */
     if (toggleBtn && dropdown) {
         toggleBtn.addEventListener('click', function (e) {
             e.stopPropagation();
@@ -36,11 +40,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         // Cerrar menú al hacer clic en cualquier enlace del dropdown
-        const dropdownLinks = dropdown.querySelectorAll('.dropdown-link');
-        dropdownLinks.forEach(function (link) {
-            link.addEventListener('click', function () {
+        dropdown.addEventListener('click', function (e) {
+            if (e.target.closest('a')) {
                 closeDropdown();
-            });
+            }
         });
 
         // Cerrar menú al hacer clic fuera
@@ -61,45 +64,191 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ===== NAVEGACIÓN POR ESTADOS (SCROLL) =====
 
-    if (!navbar || !logoFloating || !homeSection) return;
+    if (navbar && logoFloating && homeSection) {
+        let scrollTicking = false;
 
-    let ticking = false;
+        function updateNavigationState() {
+            const homeBottom = homeSection.getBoundingClientRect().bottom;
+            const threshold = 100;
+
+            if (homeBottom > threshold) {
+                navbar.classList.remove('is-hidden');
+                logoFloating.classList.remove('is-visible');
+            } else {
+                navbar.classList.add('is-hidden');
+                logoFloating.classList.add('is-visible');
+                closeDropdown();
+            }
+
+            scrollTicking = false;
+        }
+
+        function onScroll() {
+            if (!scrollTicking) {
+                window.requestAnimationFrame(updateNavigationState);
+                scrollTicking = true;
+            }
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        updateNavigationState();
+    }
+
+    // ===== SISTEMA DE NAVEGACIÓN ADAPTATIVA =====
+
+    if (!navbarLinks || !overflowLinks || !navbar || !logo || !toggleBtn) return;
+
+    // Configuración
+    const PADDING_SAFETY = 60; // Margen de seguridad en px
+    const GAP = 24; // Gap entre elementos (--spacing-md)
+
+    // Guardar referencias originales de los enlaces
+    const originalLinks = Array.from(navbarLinks.querySelectorAll('li[data-priority]'));
+
+    // Ordenar por prioridad (mayor prioridad = sale primero)
+    const linksByPriority = [...originalLinks].sort((a, b) => {
+        return parseInt(b.dataset.priority) - parseInt(a.dataset.priority);
+    });
+
+    // Estado
+    let resizeTicking = false;
+    let overflowedLinks = [];
 
     /**
-     * Actualiza la visibilidad de navbar y logo según la posición del scroll
-     * - Home: navbar visible, logo flotante oculto
-     * - Fuera Home: navbar oculta, logo flotante visible
+     * Calcula el ancho disponible para los enlaces
      */
-    function updateNavigationState() {
-        const homeBottom = homeSection.getBoundingClientRect().bottom;
-        const threshold = 100;
+    function getAvailableWidth() {
+        const navbarWidth = navbar.offsetWidth;
+        const logoWidth = logo.offsetWidth;
+        const toggleWidth = toggleBtn.offsetWidth;
+        const padding = parseInt(getComputedStyle(navbar).paddingLeft) * 2;
 
-        if (homeBottom > threshold) {
-            // Usuario en Home: navbar visible, logo oculto
-            navbar.classList.remove('is-hidden');
-            logoFloating.classList.remove('is-visible');
-        } else {
-            // Usuario fuera de Home: navbar oculta, logo visible
-            navbar.classList.add('is-hidden');
-            logoFloating.classList.add('is-visible');
-
-            // Cerrar dropdown cuando navbar se oculta (mejora #2)
-            closeDropdown();
-        }
-
-        ticking = false;
+        return navbarWidth - logoWidth - toggleWidth - padding - PADDING_SAFETY;
     }
 
-    function onScroll() {
-        if (!ticking) {
-            window.requestAnimationFrame(updateNavigationState);
-            ticking = true;
+    /**
+     * Calcula el ancho total de los enlaces visibles
+     */
+    function getLinksWidth() {
+        let totalWidth = 0;
+        const visibleLinks = originalLinks.filter(li => !li.classList.contains('is-hidden'));
+
+        visibleLinks.forEach((li, index) => {
+            totalWidth += li.offsetWidth;
+            if (index < visibleLinks.length - 1) {
+                totalWidth += GAP;
+            }
+        });
+
+        return totalWidth;
+    }
+
+    /**
+     * Mueve un enlace al dropdown (overflow)
+     */
+    function moveToOverflow(li) {
+        li.classList.add('is-hidden');
+
+        // Clonar el enlace para el dropdown
+        const link = li.querySelector('a').cloneNode(true);
+        const newLi = document.createElement('li');
+        newLi.appendChild(link);
+        newLi.dataset.originalPriority = li.dataset.priority;
+
+        // Insertar al principio (los que salen primero van arriba)
+        overflowLinks.insertBefore(newLi, overflowLinks.firstChild);
+        overflowedLinks.push(li);
+
+        updateDividerVisibility();
+    }
+
+    /**
+     * Restaura un enlace del dropdown a la navbar
+     */
+    function restoreFromOverflow(li) {
+        li.classList.remove('is-hidden');
+
+        // Eliminar del overflow
+        const priority = li.dataset.priority;
+        const overflowItem = overflowLinks.querySelector(`li[data-original-priority="${priority}"]`);
+        if (overflowItem) {
+            overflowItem.remove();
+        }
+
+        overflowedLinks = overflowedLinks.filter(item => item !== li);
+        updateDividerVisibility();
+    }
+
+    /**
+     * Actualiza visibilidad del separador
+     */
+    function updateDividerVisibility() {
+        if (dropdownDivider) {
+            dropdownDivider.style.display = overflowLinks.children.length > 0 ? 'block' : 'none';
         }
     }
 
-    // Escuchar scroll con passive para mejor rendimiento
-    window.addEventListener('scroll', onScroll, { passive: true });
+    /**
+     * Actualiza el estado de overflow basado en el espacio disponible
+     */
+    function updateOverflow() {
+        const availableWidth = getAvailableWidth();
+        let currentWidth = getLinksWidth();
 
-    // Estado inicial
-    updateNavigationState();
+        // Fase 1: Mover enlaces al overflow si no caben
+        for (const li of linksByPriority) {
+            if (li.classList.contains('is-hidden')) continue;
+
+            if (currentWidth > availableWidth) {
+                moveToOverflow(li);
+                currentWidth = getLinksWidth();
+            }
+        }
+
+        // Fase 2: Restaurar enlaces si hay espacio
+        // Iterar en orden inverso (menor prioridad = restaurar primero)
+        const linksToRestore = [...overflowedLinks].sort((a, b) => {
+            return parseInt(a.dataset.priority) - parseInt(b.dataset.priority);
+        });
+
+        for (const li of linksToRestore) {
+            // Temporalmente mostrar para medir
+            li.classList.remove('is-hidden');
+            const testWidth = getLinksWidth();
+
+            if (testWidth <= availableWidth) {
+                // Cabe, restaurar permanentemente
+                restoreFromOverflow(li);
+            } else {
+                // No cabe, volver a ocultar
+                li.classList.add('is-hidden');
+                break; // No intentar restaurar más
+            }
+        }
+
+        resizeTicking = false;
+    }
+
+    /**
+     * Handler de resize con throttle
+     */
+    function onResize() {
+        if (!resizeTicking) {
+            window.requestAnimationFrame(updateOverflow);
+            resizeTicking = true;
+        }
+    }
+
+    // Event listeners
+    window.addEventListener('resize', onResize, { passive: true });
+    window.addEventListener('orientationchange', onResize);
+
+    // Estado inicial (con pequeño delay para asegurar renders)
+    setTimeout(updateOverflow, 100);
+
+    // Actualizar de nuevo después de que las fuentes carguen
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(updateOverflow);
+    }
 });
+

@@ -124,4 +124,14 @@
     --shadow-navbar: 0 4px 20px var(--color-shadow-dark);
     --shadow-glow-subtle: 0 0 0 1px var(--color-glow-light);
     --shadow-inset-glow: inset 0 1px 0 var(--color-glow-light);
+
+
+    /* ===== Z-INDEX SYSTEM ===== */
+    /* Sistema organizado para evitar conflictos de capas */
+
+    --z-dropdown: 900;
+    --z-navbar: 1000;
+    --z-modal: 1100;
+    --z-tooltip: 1200;
+    --z-toast: 1300;
 }

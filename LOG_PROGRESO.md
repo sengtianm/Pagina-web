@@ -340,3 +340,69 @@ Este archivo es la fuente de verdad sobre el avance del proyecto. El agente de A
 1. Abre `index.html` en el navegador
 2. La navbar debe verse más amplia con mayor separación entre elementos
 3. Los espacios entre logo, enlaces y hamburguesa son más generosos
+
+---
+
+### ✅ [20-ENE-2026] - Mejoras de Revisión Crítica (9 puntos)
+
+**Estado:** Completado
+
+**Prioridad Alta (3 puntos):**
+- ✅ Corregido ID/href inconsistente: `#como-ayudo` → `#como-transformo`
+- ✅ Eliminado `min-height: 150px` del dropdown (se adapta al contenido)
+- ✅ Eliminada transición `background-color` huérfana en `.dropdown-link`
+
+**Prioridad Media (3 puntos):**
+- ✅ Colores hardcodeados reemplazados por variables CSS (`--color-text-primary`, `--color-accent-5`)
+- ✅ Agregado control de overflow para móviles en `.navbar-links` (`max-width`, `overflow: hidden`)
+- ✅ Accesibilidad mejorada: `id="navbar-toggle"` + `aria-labelledby="navbar-toggle"`
+
+**Prioridad Baja (3 puntos):**
+- ✅ Verificado `logo-alt.svg` existe correctamente
+- ✅ Smooth scroll ya implementado en `base.css`
+- ✅ Sistema de z-index con variables: `--z-dropdown`, `--z-navbar`, `--z-modal`, `--z-tooltip`, `--z-toast`
+
+**Archivos Modificados:**
+- `index.html` - IDs, hrefs, atributos ARIA
+- `css/layout.css` - Colores con variables, overflow, z-index
+- `css/variables.css` - Sistema z-index agregado
+
+**Instrucciones de Verificación:**
+1. Abre `index.html` en el navegador
+2. El enlace "Cómo transformo" debe navegar correctamente
+3. El dropdown se ajusta al contenido sin espacio vacío
+4. Los colores siguen funcionando igual
+
+---
+
+### ✅ [20-ENE-2026] - Sistema de Navegación Adaptativo
+
+**Estado:** Completado
+
+**Descripción:**
+Implementado sistema inteligente de transferencia de secciones que reorganiza la navegación según el espacio disponible, sin comprimir ni romper texto.
+
+**Comportamiento:**
+- Los enlaces migran de derecha a izquierda: Contacto → Servicios → Proyectos → Cómo transformo → Sobre mí
+- Los enlaces migrados aparecen arriba en el menú hamburguesa
+- Al ampliar ventana, los enlaces regresan a la barra principal
+- El dropdown se adapta automáticamente al contenido
+
+**Archivos Creados/Modificados:**
+- `index.html` - Agregado `data-priority` a enlaces, sección `overflow-links` y `dropdown-divider`
+- `css/layout.css` - Estilos para `.overflow-links`, `.dropdown-divider`, dropdown auto-width, `.is-hidden`
+- `js/navigation.js` - Módulo completo de navegación adaptativa (~150 líneas nuevas)
+
+**Aspectos Técnicos:**
+- ✅ Detección real de espacio disponible (no media queries estáticas)
+- ✅ Transferencia dinámica de nodos DOM
+- ✅ Throttle con `requestAnimationFrame` para rendimiento
+- ✅ Soporte para cambio de orientación
+- ✅ Espera a que las fuentes carguen antes de calcular
+
+**Instrucciones de Verificación:**
+1. Abre `index.html` en el navegador
+2. Reduce el ancho de la ventana lentamente
+3. Los enlaces deben desaparecer uno por uno (sin cortes de texto)
+4. Haz clic en ☰ para ver los enlaces migrados arriba
+5. Amplía la ventana y los enlaces deben regresar
