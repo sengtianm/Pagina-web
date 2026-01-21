@@ -316,3 +316,27 @@ Este archivo es la fuente de verdad sobre el avance del proyecto. El agente de A
 
 **Archivos Eliminados:**
 - `js/menu.js`
+
+---
+
+### ✅ [20-ENE-2026] - Aumento de Espacio en Navbar
+
+**Estado:** Completado
+
+**Cambios Realizados:**
+- Aumentado ancho máximo de la navbar: `600px` → `750px`
+- Aumentado padding horizontal interno: `--spacing-md` (24px) → `--spacing-lg` (32px)
+
+**Archivos Modificados:**
+- `css/variables.css` - Variable `--navbar-max-width` actualizada
+- `css/layout.css` - Padding de `.navbar-floating` actualizado
+
+**Resultado:**
+- ✅ Mayor espacio entre el logo "SM" y los enlaces de navegación
+- ✅ Mayor espacio entre los enlaces de navegación y el icono ☰
+- ✅ Navbar más ancha y con mejor distribución visual
+
+**Instrucciones de Verificación:**
+1. Abre `index.html` en el navegador
+2. La navbar debe verse más amplia con mayor separación entre elementos
+3. Los espacios entre logo, enlaces y hamburguesa son más generosos

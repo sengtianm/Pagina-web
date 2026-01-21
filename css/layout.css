@@ -50,7 +50,7 @@ section {
     justify-content: space-between;
     /* Logo izquierda, icono derecha */
     gap: var(--spacing-sm);
-    padding: 0 var(--spacing-md);
+    padding: 0 var(--spacing-lg);
 
     /* Efecto isla flotante con glassmorphism */
     background-color: var(--color-bg-glass);
@@ -344,8 +344,7 @@ section {
 .dropdown-link:hover,
 .dropdown-link:active {
     color: #F9C74F;
-    background-color: rgba(249, 199, 79, 0.1);
-    transform: scale(1.02);
+    transform: scale(1.05);
 }
 
 .dropdown-link:focus-visible {
