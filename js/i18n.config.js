@@ -34,7 +34,13 @@ const I18N_CONFIG = {
      * Ruta base donde se encuentran los archivos de traducción.
      * Los archivos deben seguir el patrón: {basePath}/{langCode}.json
      */
-    localesPath: './locales'
+    localesPath: './locales',
+
+    /**
+     * Modo debug: muestra logs en consola.
+     * Cambiar a false antes de publicar en producción.
+     */
+    debug: false
 };
 
 // Exportar para uso global (compatible con scripts tradicionales)

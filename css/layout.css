@@ -462,6 +462,15 @@ section {
     display: flex;
     align-items: center;
     gap: var(--spacing-xs);
+
+    /* Transición igual que navbar (1000ms) */
+    transition: opacity 1000ms ease;
+}
+
+/* Estado oculto - misma animación que navbar */
+.lang-selector-floating.is-hidden {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .lang-btn-floating {
@@ -469,7 +478,10 @@ section {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0;
+
+    /* Estructura para el sombreado */
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-md);
 
     /* Tipografía */
     font-family: var(--font-primary);
@@ -479,20 +491,24 @@ section {
     color: var(--color-text-primary);
 
     /* Transición */
-    transition: color var(--transition-base);
+    transition:
+        color var(--transition-base),
+        background-color var(--transition-base);
 }
 
 .lang-btn-floating:hover {
-    color: var(--color-text-secondary);
+    color: var(--color-accent-5);
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 /* Estado activo - idioma seleccionado */
 .lang-btn-floating.is-active {
-    color: var(--color-text-secondary);
+    color: var(--color-accent-5);
+    background-color: rgba(255, 255, 255, 0.08);
 }
 
 .lang-btn-floating:focus-visible {
-    outline: 2px solid var(--color-text-primary);
+    outline: 2px solid var(--color-accent-5);
     outline-offset: 2px;
     border-radius: var(--radius-sm);
 }

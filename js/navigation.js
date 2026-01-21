@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const toggleBtn = document.querySelector('.navbar-toggle');
     const dropdown = document.querySelector('.navbar-dropdown');
     const logoFloating = document.querySelector('.logo-floating');
+    const langSelector = document.querySelector('.lang-selector-floating');
     const homeSection = document.querySelector('#home');
 
     // Elementos para navegación adaptativa
@@ -74,9 +75,11 @@ document.addEventListener('DOMContentLoaded', function () {
             if (homeBottom > threshold) {
                 navbar.classList.remove('is-hidden');
                 logoFloating.classList.remove('is-visible');
+                if (langSelector) langSelector.classList.remove('is-hidden');
             } else {
                 navbar.classList.add('is-hidden');
                 logoFloating.classList.add('is-visible');
+                if (langSelector) langSelector.classList.add('is-hidden');
                 closeDropdown();
             }
 
