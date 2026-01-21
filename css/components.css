@@ -1,0 +1,506 @@
+/**
+ * COMPONENTES UI REUTILIZABLES
+ * ============================
+ * Navbar, botones, selectores, dropdowns y otros elementos de interfaz
+ */
+
+/* ===== NAVBAR FLOTANTE ===== */
+
+.navbar-floating {
+    /* Posicionamiento fijo centrado */
+    position: fixed;
+    top: var(--navbar-top-offset);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: var(--z-navbar);
+
+    /* Dimensiones */
+    width: 90%;
+    max-width: var(--navbar-max-width);
+    height: var(--navbar-height);
+
+    /* Estructura interna - Flexbox para distribuir contenido */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Logo izquierda, icono derecha */
+    gap: var(--spacing-sm);
+    padding: 0 var(--spacing-lg);
+
+    /* Efecto isla flotante con glassmorphism */
+    background-color: var(--color-bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    /* Safari fallback */
+    border: 1px solid var(--navbar-border-color);
+    border-radius: var(--radius-xl);
+
+    /* Sombras usando variables */
+    box-shadow:
+        var(--shadow-navbar),
+        var(--shadow-glow-subtle),
+        var(--shadow-inset-glow);
+
+    /* Optimización de rendimiento */
+    will-change: opacity;
+
+    /* Transiciones para estados y efectos */
+    transition:
+        box-shadow var(--transition-base),
+        background-color var(--transition-base),
+        opacity 1000ms ease;
+}
+
+/* Estado oculto de navbar */
+.navbar-floating.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Fallback para navegadores sin soporte de backdrop-filter */
+@supports not (backdrop-filter: blur(12px)) {
+    .navbar-floating {
+        background-color: var(--navbar-bg);
+    }
+}
+
+
+/* ===== NAVBAR BRAND (Logo + Nombre) ===== */
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    text-decoration: none;
+    color: var(--color-text-primary);
+    transition: opacity var(--transition-base);
+}
+
+.navbar-brand:hover {
+    opacity: 0.85;
+}
+
+.navbar-logo {
+    height: 24px;
+    width: auto;
+    display: block;
+}
+
+/* Clase reservada para uso futuro (nombre junto al logo) */
+.navbar-name {
+    font-family: var(--font-primary);
+    font-size: 0.875rem;
+    /* 14px */
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+
+/* ===== NAVBAR LINKS (Enlaces principales centrados) ===== */
+
+.navbar-links {
+    /* Reset y estructura */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+
+    /* Centrado absoluto */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    /* Sin wrap - el sistema adaptativo maneja el overflow */
+    white-space: nowrap;
+}
+
+.navbar-link {
+    /* Tipografía */
+    font-family: var(--font-primary);
+    font-size: 0.8125rem;
+    /* 13px */
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    text-decoration: none;
+
+    /* Color base */
+    color: var(--color-text-primary);
+
+    /* Transición suave */
+    transition:
+        color var(--transition-base),
+        transform 200ms ease;
+
+    /* Para micro-animación */
+    display: inline-block;
+}
+
+/* Estado oculto para enlaces migrados al dropdown */
+.navbar-links li.is-hidden {
+    display: none;
+}
+
+.navbar-link:hover,
+.navbar-link:active {
+    color: var(--color-accent-5);
+    transform: scale(1.05);
+}
+
+.navbar-link:focus-visible {
+    outline: 2px solid var(--color-accent-5);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+/* ===== LOGO FLOTANTE INDEPENDIENTE ===== */
+
+.logo-floating {
+    /* Posicionamiento fijo esquina superior izquierda */
+    position: fixed;
+    top: var(--navbar-top-offset);
+    left: var(--spacing-lg);
+    z-index: var(--z-navbar);
+
+    /* Estilo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+
+    /* Estado inicial: oculto */
+    opacity: 0;
+    visibility: hidden;
+
+    /* Transición solo opacidad 1s */
+    transition:
+        opacity 1000ms ease,
+        visibility 1000ms ease;
+}
+
+/* Estado visible del logo flotante */
+.logo-floating.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.logo-floating:hover {
+    opacity: 0.85;
+}
+
+.logo-floating-img {
+    height: 40px;
+    /* Más grande que en navbar (24px) */
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 2px 8px var(--color-shadow-dark));
+}
+
+/* ===== NAVBAR TOGGLE (Icono Hamburguesa) ===== */
+
+.navbar-toggle {
+    /* Reset botón */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-xs);
+
+    /* Estilo */
+    color: var(--color-text-primary);
+    font-size: 1.25rem;
+    line-height: 1;
+
+    /* Transiciones */
+    transition: color var(--transition-base);
+}
+
+.navbar-toggle:hover,
+.navbar-toggle:active {
+    color: var(--color-accent-5);
+    /* #F9C74F */
+}
+
+.navbar-toggle:focus {
+    outline: none;
+}
+
+/* Indicador de foco visible para navegación por teclado (accesibilidad) */
+.navbar-toggle:focus-visible {
+    outline: 2px solid var(--color-accent-5);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+.navbar-toggle-icon {
+    display: block;
+}
+
+
+/* ===== NAVBAR DROPDOWN (Menú Desplegable) ===== */
+
+.navbar-dropdown {
+    /* Posicionamiento */
+    position: absolute;
+    top: calc(100% + var(--spacing-xs));
+    right: 0;
+    z-index: var(--z-dropdown);
+
+    /* Dimensiones - Auto para adaptarse al contenido */
+    width: auto;
+    min-width: 180px;
+    max-width: 280px;
+    padding: var(--spacing-sm);
+
+    /* Estilo - Mismo que navbar principal */
+    background-color: var(--color-bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--navbar-border-color);
+    border-radius: var(--radius-xl);
+    box-shadow:
+        var(--shadow-navbar),
+        var(--shadow-glow-subtle),
+        var(--shadow-inset-glow);
+
+    /* Estado inicial: oculto */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+
+    /* Transiciones */
+    transition:
+        opacity var(--transition-base),
+        visibility var(--transition-base),
+        transform var(--transition-base);
+}
+
+/* Estado activo del menú */
+.navbar-dropdown.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Fallback para navegadores sin backdrop-filter */
+@supports not (backdrop-filter: blur(12px)) {
+    .navbar-dropdown {
+        background-color: var(--navbar-bg);
+    }
+}
+
+/* ===== OVERFLOW LINKS (Enlaces migrados dinámicamente) ===== */
+
+.overflow-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+/* Oculto cuando está vacío */
+.overflow-links:empty {
+    display: none;
+}
+
+/* Los enlaces migrados usan el mismo estilo que dropdown-link */
+.overflow-links .navbar-link {
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-regular);
+    display: block;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-md);
+    white-space: nowrap;
+}
+
+.overflow-links li {
+    white-space: nowrap;
+}
+
+/* ===== DROPDOWN DIVIDER ===== */
+
+.dropdown-divider {
+    height: 1px;
+    background-color: var(--color-border-subtle);
+    margin: var(--spacing-xs) 0;
+    /* Transición suave al aparecer/desaparecer */
+    transition: opacity var(--transition-base);
+}
+
+/* Oculto cuando no hay enlaces migrados */
+.dropdown-divider:has(+ .dropdown-links:first-child),
+.overflow-links:empty+.dropdown-divider {
+    display: none;
+}
+
+/* ===== DROPDOWN LINKS (Enlaces menú secundario) ===== */
+
+.dropdown-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.dropdown-link {
+    /* Tipografía */
+    font-family: var(--font-primary);
+    font-size: 0.875rem;
+    /* 14px */
+    font-weight: var(--font-weight-regular);
+    text-decoration: none;
+
+    /* Color base */
+    color: var(--color-text-primary);
+
+    /* Estructura */
+    display: block;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-md);
+
+    /* Transición suave */
+    transition:
+        color var(--transition-base),
+        transform 200ms ease;
+}
+
+.dropdown-link:hover,
+.dropdown-link:active {
+    color: var(--color-accent-5);
+    transform: scale(1.05);
+}
+
+.dropdown-link:focus-visible {
+    outline: 2px solid var(--color-accent-5);
+    outline-offset: 2px;
+}
+
+/* ===== SELECTOR DE IDIOMA FLOTANTE ===== */
+
+.lang-selector-floating {
+    /* Posicionamiento fijo esquina superior derecha */
+    position: fixed;
+    top: var(--navbar-top-offset);
+    right: var(--spacing-lg);
+    z-index: var(--z-navbar);
+
+    /* Centrado vertical con la navbar */
+    height: var(--navbar-height);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+
+    /* Transición igual que navbar (1000ms) */
+    transition: opacity 1000ms ease;
+}
+
+/* Estado oculto - misma animación que navbar */
+.lang-selector-floating.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.lang-btn-floating {
+    /* Reset */
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    /* Estructura para el sombreado */
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-md);
+
+    /* Tipografía */
+    font-family: var(--font-primary);
+    font-size: 0.8125rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.02em;
+    color: var(--color-text-primary);
+
+    /* Transición */
+    transition:
+        color var(--transition-base),
+        background-color var(--transition-base);
+}
+
+.lang-btn-floating:hover {
+    color: var(--color-accent-5);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Estado activo - idioma seleccionado */
+.lang-btn-floating.is-active {
+    color: var(--color-accent-5);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.lang-btn-floating:focus-visible {
+    outline: 2px solid var(--color-accent-5);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+.lang-separator {
+    color: var(--color-text-tertiary);
+    font-size: 0.75rem;
+    user-select: none;
+}
+
+
+/* ===== RESPONSIVE: COMPONENTES ===== */
+
+/* Tablet: 768px - 1024px */
+@media (max-width: 1024px) {
+    .navbar-floating {
+        gap: var(--spacing-xs);
+        padding: 0 var(--spacing-sm);
+    }
+
+    /* Logo flotante responsive - Tablet */
+    .logo-floating {
+        left: var(--spacing-md);
+    }
+
+    .logo-floating-img {
+        height: 36px;
+    }
+
+    /* Dropdown responsive - Tablet */
+    .navbar-dropdown {
+        width: 180px;
+        min-height: 130px;
+    }
+}
+
+/* Mobile: < 768px */
+@media (max-width: 768px) {
+    .navbar-floating {
+        width: 94%;
+        gap: var(--spacing-xs);
+        padding: 0 var(--spacing-xs);
+        border-radius: var(--radius-lg);
+    }
+
+    /* Logo flotante responsive - Mobile */
+    .logo-floating {
+        left: var(--spacing-sm);
+        top: var(--navbar-top-offset);
+    }
+
+    .logo-floating-img {
+        height: 32px;
+    }
+
+    /* Dropdown responsive - Mobile */
+    .navbar-dropdown {
+        width: 160px;
+        min-height: 120px;
+        padding: var(--spacing-xs);
+    }
+}

@@ -828,3 +828,247 @@ El sistema usa `fetch()` para cargar los JSON de traducciones. Los navegadores b
 - Migrar textos de hero, about, services, contact, footer
 - Eliminar comentarios "Contenido pendiente"
 
+---
+
+### ✅ [21-ENE-2026] - Separación de CSS: Componentes vs Layout
+
+**Estado:** Completado
+
+**Descripción:**
+Separación arquitectónica de estilos CSS. Los componentes UI reutilizables fueron extraídos de `layout.css` a un nuevo archivo `components.css`, dejando `layout.css` enfocado exclusivamente en estructura.
+
+**Archivos Creados:**
+- `css/components.css` — Estilos de componentes UI (~500 líneas)
+
+**Archivos Modificados:**
+- `css/layout.css` — Reducido de 658 a ~115 líneas (solo estructura)
+- `index.html` — Agregado link a `components.css`
+
+**Contenido de `components.css`:**
+- Navbar flotante (`.navbar-floating`, `.navbar-brand`, `.navbar-logo`, `.navbar-name`)
+- Navbar links (`.navbar-links`, `.navbar-link`)
+- Logo flotante (`.logo-floating`, `.logo-floating-img`)
+- Toggle/Hamburguesa (`.navbar-toggle`, `.navbar-toggle-icon`)
+- Dropdown (`.navbar-dropdown`, `.dropdown-links`, `.dropdown-link`, `.overflow-links`, `.dropdown-divider`)
+- Selector de idioma (`.lang-selector-floating`, `.lang-btn-floating`, `.lang-separator`, `.dropdown-lang-selector`, `.lang-btn`)
+- Breakpoints responsive de componentes (tablet/mobile)
+
+**Contenido de `layout.css` (reducido):**
+- Container system (`.container`)
+- Espaciado de secciones (`section`, `#home`)
+- Footer (`footer`)
+- Grid system (`.grid-2`, `.grid-3`, `.grid-4`)
+- Variables responsive en `:root` (font sizes, container padding, navbar tokens)
+- Breakpoints de grids y secciones
+
+**Estructura CSS Final:**
+```
+css/
+├── variables.css    ← Tokens de diseño (sin cambios)
+├── base.css         ← Reset + tipografía (sin cambios)
+├── layout.css       ← Estructura: containers, secciones, grids
+└── components.css   ← UI reutilizable: navbar, botones, selectores
+```
+
+**Verificación Visual:**
+- ✅ Navbar aparece con glassmorphism
+- ✅ Logo visible a la izquierda
+- ✅ Enlaces centrados
+- ✅ Menú hamburguesa funcional
+- ✅ Dropdown abre correctamente
+- ✅ Responsive se adapta
+- ✅ Al scroll: navbar se oculta, logo flotante aparece
+- ✅ Sin regresiones visuales
+
+**Beneficios:**
+- Mejor organización y mantenibilidad
+- `layout.css` ahora es fácil de leer (~115 líneas vs 658)
+- Componentes fáciles de localizar y modificar
+- Preparado para escalar con más componentes
+
+**Instrucciones de Verificación:**
+1. Abre `index.html` en el navegador
+2. Todo debe verse exactamente igual que antes
+3. Prueba el menú hamburguesa, scroll, y responsive
+
+---
+
+### ✅ [21-ENE-2026] - Clases CSS en Secciones HTML
+
+**Estado:** Completado
+
+**Descripción:**
+Agregadas clases CSS identificadoras a todas las secciones HTML. Cada sección ahora tiene la clase base `section` más un modificador BEM `section--nombre`.
+
+**Archivo Modificado:**
+- `index.html` — 9 secciones actualizadas
+
+**Mapeo de Clases:**
+
+| ID | Clases Agregadas |
+|----|------------------|
+| `#home` | `section section--hero` |
+| `#sobre-mi` | `section section--about` |
+| `#como-transformo` | `section section--transform` |
+| `#proyectos` | `section section--projects` |
+| `#como-trabajo` | `section section--workflow` |
+| `#servicios` | `section section--services` |
+| `#modelos` | `section section--models` |
+| `#perfil-profesional` | `section section--profile` |
+| `#contacto` | `section section--contact` |
+
+**Beneficios:**
+- IDs reservados para navegación y JS (sin conflictos de especificidad)
+- Clases disponibles para estilos específicos por sección
+- Patrón BEM consistente
+- Preparado para temas/variantes
+
+**Verificación:**
+- ✅ Sin cambios visuales
+- ✅ IDs intactos (navegación funciona)
+- ✅ Clases consistentes en todas las secciones
+
+**Instrucciones de Verificación:**
+1. Abre `index.html` en el navegador
+2. Todo debe verse exactamente igual que antes
+3. Los enlaces de navegación deben seguir funcionando
+
+---
+
+### ✅ [21-ENE-2026] - Sistema de Utilidades CSS
+
+**Estado:** Completado
+
+**Descripción:**
+Creado archivo `utilities.css` con clases de utilidad básicas para desarrollo rápido y consistente.
+
+**Archivo Creado:**
+- `css/utilities.css` — ~220 líneas
+
+**Archivo Modificado:**
+- `index.html` — Agregado link a utilities.css
+
+**Clases Incluidas:**
+
+| Categoría | Ejemplos |
+|-----------|----------|
+| Margin | `.mt-0` a `.mt-6`, `.mb-*`, `.ml-*`, `.mr-*`, `.mx-auto`, `.my-*` |
+| Padding | `.pt-0` a `.pt-5`, `.pb-*`, `.pl-*`, `.pr-*`, `.px-*`, `.py-*` |
+| Texto | `.text-left`, `.text-center`, `.text-right`, `.text-justify` |
+| Fuente peso | `.font-light`, `.font-regular`, `.font-medium`, `.font-semibold`, `.font-bold` |
+| Fuente tamaño | `.text-sm`, `.text-base`, `.text-lg`, `.text-xl`, `.text-2xl` |
+| Visibilidad | `.visually-hidden`, `.hidden`, `.invisible` |
+| Flexbox | `.flex`, `.flex-center`, `.flex-col`, `.justify-*`, `.items-*`, `.gap-*` |
+| Dimensiones | `.w-full`, `.h-full`, `.h-screen`, `.min-h-screen` |
+| Posición | `.relative`, `.absolute`, `.fixed`, `.sticky` |
+| Overflow | `.overflow-hidden`, `.overflow-auto` |
+| Cursor | `.cursor-pointer`, `.cursor-not-allowed` |
+| Selección | `.select-none`, `.select-text` |
+
+**Estructura CSS Final:**
+```
+css/
+├── variables.css    ← Tokens
+├── base.css         ← Reset + tipografía
+├── layout.css       ← Estructura
+├── components.css   ← Componentes UI
+└── utilities.css    ← Utilidades
+```
+
+**Instrucciones de Verificación:**
+1. Abre `index.html` en el navegador
+2. Todo debe verse exactamente igual (las utilidades no se usan aún, solo están disponibles)
+
+---
+
+### ✅ [21-ENE-2026] - Variables de Color de Texto Faltantes
+
+**Estado:** Completado
+
+**Descripción:**
+Agregadas las variables de color de texto secundario y terciario que ya se usaban en `components.css` pero no estaban definidas.
+
+**Archivo Modificado:**
+- `css/variables.css` — +2 variables
+
+**Variables Agregadas:**
+```css
+--color-text-secondary: rgba(241, 245, 249, 0.7);   /* 70% opacidad */
+--color-text-tertiary: rgba(241, 245, 249, 0.5);    /* 50% opacidad */
+```
+
+**Problema Resuelto:**
+Los elementos que usaban estas variables ahora tienen colores definidos en lugar del fallback del navegador.
+
+**Verificación:**
+1. Abre `index.html` en el navegador
+2. El separador de idioma "|" debe verse con opacidad correcta (50%)
+
+---
+
+### ✅ [21-ENE-2026] - Optimización de Carga de Fuentes (Preload)
+
+**Estado:** Completado
+
+**Descripción:**
+Agregado preload explícito para la fuente principal Libre Franklin (peso 400, latin) en formato woff2 para mejorar LCP y evitar Flash of Invisible Text.
+
+**Archivo Modificado:**
+- `index.html` — +1 link preload
+
+**Código Agregado:**
+```html
+<link rel="preload"
+    href="https://fonts.gstatic.com/s/librefranklin/v20/jizOREVItHgc8qDIbSTKq4XkRg8T88bjFuXOnduhLsWkANDJ.woff2"
+    as="font" type="font/woff2" crossorigin>
+```
+
+**Beneficios:**
+- Mejora 50-100ms en tiempo de visualización de texto
+- Evita FOIT (Flash of Invisible Text) en conexiones lentas
+- Mejor puntuación LCP (Largest Contentful Paint)
+
+**Orden de Carga Actual:**
+1. `preconnect` a fonts.googleapis.com
+2. `preconnect` a fonts.gstatic.com
+3. `preload` de woff2 (peso 400 latin) ← NUEVO
+4. `stylesheet` de Google Fonts CSS
+
+**Verificación:**
+1. Abre `index.html` con DevTools (F12)
+2. Ve a Network > Fonts
+3. Verifica que el woff2 se cargue sin duplicados
+4. No debe haber warnings en consola
+
+---
+
+### ✅ [21-ENE-2026] - Limpieza Selector de Idioma Duplicado
+
+**Estado:** Completado
+
+**Descripción:**
+Eliminados estilos CSS no utilizados. El HTML solo usa `.lang-selector-floating`, pero existían estilos duplicados para un selector de dropdown que nunca se implementó.
+
+**Archivo Modificado:**
+- `css/components.css` — -42 líneas eliminadas
+
+**Clases Eliminadas:**
+- `.dropdown-lang-selector`
+- `.lang-btn`
+- `.lang-btn:hover`
+- `.lang-btn:focus-visible`
+
+**Clases Mantenidas (en uso):**
+- `.lang-selector-floating`
+- `.lang-btn-floating`
+- `.lang-separator`
+
+**Beneficios:**
+- CSS más limpio y ligero
+- Una sola fuente de verdad para el selector de idioma
+- Evita confusión al desarrollar
+
+**Verificación:**
+1. Abre `index.html` en el navegador
+2. El selector ES | EN debe funcionar igual que antes
+

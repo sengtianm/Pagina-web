@@ -11,6 +11,10 @@
     /* Colores Principales */
     --color-bg-primary: #242124;
     --color-text-primary: #F1F5F9;
+    --color-text-secondary: rgba(241, 245, 249, 0.7);
+    /* 70% opacidad */
+    --color-text-tertiary: rgba(241, 245, 249, 0.5);
+    /* 50% opacidad */
 
     /* Colores Secundarios (Paleta Vibrante) */
     --color-accent-1: #F94144;
