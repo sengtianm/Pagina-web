@@ -321,10 +321,9 @@ section {
 
 .dropdown-divider {
     height: 1px;
-    /* Color más visible que funciona en todos los dispositivos */
-    background-color: rgba(255, 255, 255, 0.15);
+    /* Color visible en todos los dispositivos incluyendo móviles */
+    background-color: rgba(255, 255, 255, 0.25);
     margin: var(--spacing-xs) 0;
-    transition: opacity var(--transition-base);
 }
 
 .overflow-links:empty+.dropdown-divider {
