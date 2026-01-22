@@ -251,7 +251,7 @@ section {
 
     width: auto;
     min-width: 180px;
-    max-width: 280px;
+    /* Sin max-width - el contenedor se adapta al texto más largo */
     padding: var(--spacing-sm);
 
     background-color: var(--color-bg-glass);
@@ -321,7 +321,8 @@ section {
 
 .dropdown-divider {
     height: 1px;
-    background-color: var(--color-border-subtle);
+    /* Color más visible que funciona en todos los dispositivos */
+    background-color: rgba(255, 255, 255, 0.15);
     margin: var(--spacing-xs) 0;
     transition: opacity var(--transition-base);
 }
@@ -348,6 +349,7 @@ section {
     font-weight: var(--font-weight-regular);
     text-decoration: none;
     color: var(--color-text-primary);
+    white-space: nowrap;
 
     display: block;
     padding: var(--spacing-xs) var(--spacing-sm);
