@@ -251,7 +251,7 @@
     /* Dimensiones - Auto para adaptarse al contenido */
     width: auto;
     min-width: 180px;
-    max-width: 280px;
+    /* Sin max-width - el contenedor se adapta al texto más largo */
     padding: var(--spacing-sm);
 
     /* Estilo - Mismo que navbar principal */
@@ -325,14 +325,11 @@
 
 .dropdown-divider {
     height: 1px;
-    background-color: var(--color-border-subtle);
+    /* Color visible en todos los dispositivos incluyendo móviles */
+    background-color: rgba(255, 255, 255, 0.25);
     margin: var(--spacing-xs) 0;
-    /* Transición suave al aparecer/desaparecer */
-    transition: opacity var(--transition-base);
 }
 
-/* Oculto cuando no hay enlaces migrados */
-.dropdown-divider:has(+ .dropdown-links:first-child),
 .overflow-links:empty+.dropdown-divider {
     display: none;
 }
@@ -367,19 +364,67 @@
     /* Transición suave */
     transition:
         color var(--transition-base),
-        transform 200ms ease;
+        background-color var(--transition-base);
 }
 
 .dropdown-link:hover,
 .dropdown-link:active {
     color: var(--color-accent-5);
-    transform: scale(1.05);
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .dropdown-link:focus-visible {
     outline: 2px solid var(--color-accent-5);
     outline-offset: 2px;
 }
+
+/* ===== SELECTOR DE IDIOMA EN DROPDOWN ===== */
+
+.dropdown-lang-section {
+    display: none;
+    /* Oculto por defecto, visible cuando no hay espacio */
+}
+
+.dropdown-lang-section.is-visible {
+    display: block;
+}
+
+.dropdown-lang-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) 0;
+}
+
+.lang-btn-dropdown {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-md);
+
+    font-family: var(--font-primary);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.02em;
+    color: var(--color-text-primary);
+
+    transition:
+        color var(--transition-base),
+        background-color var(--transition-base);
+}
+
+.lang-btn-dropdown:hover {
+    color: var(--color-accent-5);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.lang-btn-dropdown.is-active {
+    color: var(--color-accent-5);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
 
 /* ===== SELECTOR DE IDIOMA FLOTANTE ===== */
 
